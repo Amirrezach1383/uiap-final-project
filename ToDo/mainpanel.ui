@@ -71,7 +71,7 @@ QLabel {
     <property name="geometry">
      <rect>
       <x>384</x>
-      <y>358</y>
+      <y>360</y>
       <width>230</width>
       <height>51</height>
      </rect>
