@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>Image/MainPanelBackGround.jpg</file>
         <file>Image/LoginPanel.png</file>
+        <file>Image/backPB.png</file>
+        <file>Image/SignUpPanel.png</file>
     </qresource>
 </RCC>

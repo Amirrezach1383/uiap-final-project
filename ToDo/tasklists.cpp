@@ -1,3 +1,3 @@
 #include "tasklists.h"
 
-TaskLists::TaskLists() {}
+TaskLists::TaskLists() : listName("Untitled List") {}

@@ -11,8 +11,6 @@ private:
     QString password;
     QString firstName;
     QString lastName;
-
-
 };
 
 #endif // USERS_H

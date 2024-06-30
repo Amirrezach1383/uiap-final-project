@@ -1,3 +1,5 @@
 #include "task.h"
 
-Task::Task() {}
+Task::Task() : taskTitle("Untitled"),
+               taskDetails("Enter some details"),
+               favorite(false) {}

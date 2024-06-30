@@ -6,27 +6,157 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>479</width>
+    <width>1000</width>
     <height>670</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>479</width>
+    <width>1000</width>
     <height>670</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>479</width>
+    <width>1000</width>
     <height>670</height>
    </size>
+  </property>
+  <property name="cursor">
+   <cursorShape>PointingHandCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+background-image: url(:/Image/SignUpPanel.png);
+}
+
+QLineEdit:hover  {
+	color: rgb(37, 17, 56);
+}
+
+QLineEdit {
+	background : transparent; 
+	border: none;
+	font: 15pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(0, 0, 0);
+}
+QPushButton:hover {
+	color: rgb(212, 171, 241);
+}
+QPushButton {
+	background : transparent; 
+	border: none;
+	font: 12pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(154, 124, 175);
+}
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="firstNameLE">
+    <property name="geometry">
+     <rect>
+      <x>446</x>
+      <y>167</y>
+      <width>160</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lastNameLE">
+    <property name="geometry">
+     <rect>
+      <x>444</x>
+      <y>253</y>
+      <width>160</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Last Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="usernameLE">
+    <property name="geometry">
+     <rect>
+      <x>444</x>
+      <y>338</y>
+      <width>160</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Username</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="passwordLE">
+    <property name="geometry">
+     <rect>
+      <x>443</x>
+      <y>423</y>
+      <width>160</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Password</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="signUpPB">
+    <property name="geometry">
+     <rect>
+      <x>443</x>
+      <y>503</y>
+      <width>120</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sign Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backPB">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>31</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="Resources.qrc">
+      <normaloff>:/Image/backPB.png</normaloff>:/Image/backPB.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
