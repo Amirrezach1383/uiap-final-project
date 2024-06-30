@@ -12,15 +12,19 @@ SOURCES += \
     loginpanel.cpp \
     main.cpp \
     mainpanel.cpp \
-    signuppanel.cpp
+    signuppanel.cpp \
+    users.cpp
 
 HEADERS += \
     loginpanel.h \
     mainpanel.h \
-    signuppanel.h
+    signuppanel.h \
+    users.h
 
 FORMS += \
-    mainpanel.ui
+    loginpanel.ui \
+    mainpanel.ui \
+    signuppanel.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

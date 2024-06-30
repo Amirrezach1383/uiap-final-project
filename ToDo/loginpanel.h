@@ -3,13 +3,22 @@
 
 #include <QMainWindow>
 
-class loginPanel : public QMainWindow
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class LoginPanel;
+}
+QT_END_NAMESPACE
+
+class LoginPanel : public QMainWindow
 {
     Q_OBJECT
-public:
-    explicit loginPanel(QWidget *parent = nullptr);
 
-signals:
+public:
+    LoginPanel(QWidget *parent = nullptr);
+    ~LoginPanel();
+
+private:
+    Ui::LoginPanel *ui;
 };
 
 #endif // LOGINPANEL_H

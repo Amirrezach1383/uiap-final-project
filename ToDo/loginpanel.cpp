@@ -1,6 +1,10 @@
 #include "loginpanel.h"
+#include "ui_loginpanel.h"
 
-loginPanel::loginPanel(QWidget *parent) : QMainWindow{parent} {
+LoginPanel::LoginPanel(QWidget *parent) : QMainWindow {parent}, ui(new Ui::LoginPanel) {
+    ui->setupUi(this);
+}
 
-
+LoginPanel::~LoginPanel() {
+    delete ui;
 }

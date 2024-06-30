@@ -27,7 +27,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
-background-image: url(:/Image/MainPanelBackGround.jpg);
+	background-image: url(:/Image/MainPanelBackGround.jpg);
 }
 
 QPushButton:hover {
