@@ -13,12 +13,14 @@ SOURCES += \
     main.cpp \
     mainpanel.cpp \
     signuppanel.cpp \
+    tasklists.cpp \
     users.cpp
 
 HEADERS += \
     loginpanel.h \
     mainpanel.h \
     signuppanel.h \
+    tasklists.h \
     users.h
 
 FORMS += \
