@@ -4,5 +4,19 @@
         <file>Image/LoginPanel.png</file>
         <file>Image/backPB.png</file>
         <file>Image/SignUpPanel.png</file>
+        <file>Image/Icons/fill_home.png</file>
+        <file>Image/Icons/fill_star.png</file>
+        <file>Image/Icons/fill_star_color.png</file>
+        <file>Image/Icons/fill_sun.png</file>
+        <file>Image/Icons/fill_user.png</file>
+        <file>Image/Icons/fill_user_color.png</file>
+        <file>Image/Icons/home.png</file>
+        <file>Image/Icons/home_2.png</file>
+        <file>Image/Icons/list_icon.png</file>
+        <file>Image/Icons/out_line_star.png</file>
+        <file>Image/Icons/out_line_sun.png</file>
+        <file>Image/Icons/out_line_user.png</file>
+        <file>Image/Icons/user_account.png</file>
+        <file>Image/Icons/icons8-plus-96.png</file>
     </qresource>
 </RCC>

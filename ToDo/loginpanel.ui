@@ -115,39 +115,7 @@ QPushButton {
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="Resources.qrc">
-      <normaloff>:/Image/backPB.png</normaloff>:/Image/backPB.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="backPB_2">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>180</y>
-      <width>31</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="Resources.qrc">
+     <iconset>
       <normaloff>:/Image/backPB.png</normaloff>:/Image/backPB.png</iconset>
     </property>
     <property name="iconSize">
@@ -159,8 +127,6 @@ QPushButton {
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="Resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

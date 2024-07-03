@@ -12,6 +12,7 @@ SOURCES += \
     loginpanel.cpp \
     main.cpp \
     mainpanel.cpp \
+    maintodopanel.cpp \
     signuppanel.cpp \
     task.cpp \
     tasklists.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     LinkList.h \
     loginpanel.h \
     mainpanel.h \
+    maintodopanel.h \
     signuppanel.h \
     task.h \
     tasklists.h \
@@ -29,6 +31,7 @@ HEADERS += \
 FORMS += \
     loginpanel.ui \
     mainpanel.ui \
+    maintodopanel.ui \
     signuppanel.ui
 
 # Default rules for deployment.
@@ -39,4 +42,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     Resources.qrc
 
-DISTFILES +=
+DISTFILES += \
+    Image/Icons/icons8-plus-96.png

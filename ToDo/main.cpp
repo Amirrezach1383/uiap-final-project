@@ -2,12 +2,13 @@
 #include <signuppanel.h>
 #include <QApplication>
 #include <loginpanel.h>
+#include <maintodopanel.h>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    SignUpPanel w;
+    MainToDoPanel w;
     // MainPanel q;
     // q.show();
     w.show();
