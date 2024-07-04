@@ -1,5 +1,4 @@
 #include <QString>
-#include <users.h>
 #include <ctime>
 
 #ifndef TASK_H
@@ -15,7 +14,7 @@ private:
 
     bool favorite;
 
-    Users relatedUser;
+    QString relatedUserUsername;
 
     tm taskTime;
 };
