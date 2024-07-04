@@ -17,10 +17,11 @@ public:
     MainPanel(QWidget *parent = nullptr);
     ~MainPanel();
 
+
 private slots:
     void on_signinPB_clicked();
-
     void on_loginPB_clicked();
+
 
 private:
     Ui::MainPanel *ui;

@@ -15,6 +15,8 @@ public:
     explicit MainToDoPanel(QWidget *parent = nullptr);
     ~MainToDoPanel();
 
+    void unCheckedPB ();
+
 private slots:
     void on_newListPB_clicked();
 
@@ -29,6 +31,12 @@ private slots:
     void on_listsButton_0_clicked();
 
     void on_newTaskPB_myDay_clicked();
+
+    void listPb_clicked();
+
+    void on_newTaskPB_Task_clicked();
+
+    void on_newTaskPB_list_clicked();
 
 private:
     Ui::MainToDoPanel *ui;

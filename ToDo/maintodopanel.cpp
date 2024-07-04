@@ -7,6 +7,7 @@ MainToDoPanel::MainToDoPanel(QWidget *parent)
     ui->setupUi(this);
 
     ui->myDayPB->setChecked(true);
+    ui->mainStack->setCurrentIndex(0);
     ui->titleLB->setText("My Day");
 
     ui->sideTasksMenu->setHidden(true);
@@ -23,7 +24,6 @@ void MainToDoPanel::on_newListPB_clicked() {
 
     QString buttonText = tr(" Untitled List %1").arg(frameLayout->count() - 1);
     QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
-    listButton->icon().addFile(":/Image/Icons/list_icon.png");
 
     QIcon icon (":/Image/Icons/list_icon.png");
     listButton->setIcon(icon);
@@ -35,6 +35,9 @@ void MainToDoPanel::on_newListPB_clicked() {
     listButton->setAutoExclusive(true);
 
     frameLayout->insertWidget(frameLayout->count() - 1, listButton);
+
+    connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
+
 }
 
 void MainToDoPanel::on_myDayPB_clicked() {
@@ -42,7 +45,6 @@ void MainToDoPanel::on_myDayPB_clicked() {
     ui->mainStack->setCurrentIndex(0);
 
 }
-
 
 void MainToDoPanel::on_importantPB_clicked() {
     ui->titleLB->setText("Important");
@@ -56,18 +58,15 @@ void MainToDoPanel::on_assignedToMePB_clicked() {
 
 }
 
-
 void MainToDoPanel::on_tasksPB_clicked() {
     ui->titleLB->setText("Tasks");
     ui->mainStack->setCurrentIndex(3);
 }
 
-
 void MainToDoPanel::on_listsButton_0_clicked() {
     ui->titleLB->setText(ui->listsButton_0->text());
     ui->mainStack->setCurrentIndex(4);
 }
-
 
 void MainToDoPanel::on_newTaskPB_myDay_clicked() {
 
@@ -79,3 +78,24 @@ void MainToDoPanel::on_newTaskPB_myDay_clicked() {
 
 }
 
+void MainToDoPanel::listPb_clicked () {
+
+}
+
+void MainToDoPanel::on_newTaskPB_Task_clicked() {
+    if(ui->newTaskPB_Task->isChecked()) {
+        ui->sideTasksMenu->setVisible(true);
+    } else
+        ui->sideTasksMenu->setHidden(true);
+
+}
+
+void MainToDoPanel::on_newTaskPB_list_clicked() {
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+
+    if(button->isChecked()) {
+        ui->sideTasksMenu->setVisible(true);
+    } else
+        ui->sideTasksMenu->setHidden(true);
+}

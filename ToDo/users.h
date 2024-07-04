@@ -1,5 +1,5 @@
 #include <QString>
-#include <tasklists.h>
+#include <lists.h>
 #include <map>
 #include <list>
 
@@ -14,9 +14,9 @@ private:
     QString password;
     QString firstName;
     QString lastName;
-    std::list<TaskLists> usertaskLists;
+    std::list<Lists> taskLists;
 
-    std::map <QString, Users> usersMap;
+    std::map <QString, Users> user;
 };
 
 #endif // USERS_H

@@ -1,5 +1,6 @@
 #include <QString>
 #include <ctime>
+#include <QDate>
 
 #ifndef TASK_H
 #define TASK_H
@@ -9,14 +10,17 @@ public:
     Task();
 
 private:
-    QString taskTitle;
-    QString taskDetails;
+    QString title;
+    QString details;
+    int taskID;
+    int listID;
 
+    bool completed;
     bool favorite;
 
-    QString relatedUserUsername;
+    QString assignedUser;
 
-    tm taskTime;
+    QDate reminder;
 };
 
 #endif // TASK_H

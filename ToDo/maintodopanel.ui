@@ -30,22 +30,7 @@
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_10">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <layout class="QHBoxLayout" name="mainLayout">
       <property name="spacing">
@@ -75,8 +60,14 @@
          <property name="sizeConstraint">
           <enum>QLayout::SetFixedSize</enum>
          </property>
+         <property name="leftMargin">
+          <number>11</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
          <property name="rightMargin">
-          <number>14</number>
+          <number>11</number>
          </property>
          <property name="bottomMargin">
           <number>0</number>
@@ -198,7 +189,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>306</width>
-                  <height>540</height>
+                  <height>529</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -473,11 +464,17 @@ QPushButton:hover {
 }</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>11</number>
+         </property>
          <property name="bottomMargin">
           <number>11</number>
          </property>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="mainFrameLt">
            <item>
             <widget class="QWidget" name="titleWidget" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -530,7 +527,7 @@ border-radius : 5px;
 </string>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="myDayWindow">
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -550,9 +547,9 @@ border-radius : 5px;
                 <number>20</number>
                </property>
                <item>
-                <layout class="QVBoxLayout" name="verticalLayout_13">
+                <layout class="QVBoxLayout" name="myDayLt">
                  <item>
-                  <widget class="QWidget" name="widget_6" native="true">
+                  <widget class="QWidget" name="myDayBG" native="true">
                    <property name="styleSheet">
                     <string notr="true">QWidget {
 		background-color: rgb(33, 33, 33);
@@ -560,8 +557,11 @@ border-radius : 5px;
 }</string>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_11">
+                    <property name="leftMargin">
+                     <number>11</number>
+                    </property>
                     <item>
-                     <widget class="QScrollArea" name="scrolarea_myday">
+                     <widget class="QScrollArea" name="myDayScrollArea">
                       <property name="styleSheet">
                        <string notr="true">QPushButton {
 	text-align : left;
@@ -604,18 +604,21 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                       <property name="widgetResizable">
                        <bool>true</bool>
                       </property>
-                      <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                      <widget class="QWidget" name="scrollAreaLt">
                        <property name="geometry">
                         <rect>
                          <x>0</x>
                          <y>0</y>
                          <width>334</width>
-                         <height>465</height>
+                         <height>443</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_15">
+                        <property name="leftMargin">
+                         <number>11</number>
+                        </property>
                         <item>
-                         <widget class="QFrame" name="frame">
+                         <widget class="QFrame" name="scrollAreaFrame">
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
                           </property>
@@ -624,14 +627,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_16">
                            <item>
-                            <spacer name="verticalSpacer_2">
+                            <spacer name="spacer">
                              <property name="orientation">
                               <enum>Qt::Vertical</enum>
                              </property>
                              <property name="sizeHint" stdset="0">
                               <size>
                                <width>20</width>
-                               <height>418</height>
+                               <height>396</height>
                               </size>
                              </property>
                             </spacer>
@@ -697,17 +700,169 @@ QPushButton:checked {
              <widget class="QWidget" name="importantWindow"/>
              <widget class="QWidget" name="assignedToMe"/>
              <widget class="QWidget" name="tasks">
-              <widget class="QPushButton" name="newTaskPB_task">
-               <property name="geometry">
-                <rect>
-                 <x>17</x>
-                 <y>531</y>
-                 <width>441</width>
-                 <height>41</height>
-                </rect>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	text-align : left;
+	background : transparent; 
+	border-radius : 5 px;
+	font: 9pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(255, 255, 255);
+	height : 40 px;
+	padding-left:5px;
+	border-radius:5px;
+}
+QPushButton:hover {
+	background-color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
+}
+QPushButton:checked {
+	background-color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
+}
+QScrollArea {
+    border:1px solid #333333;
+}
+
+QScrollBar:vertical {
+    background: rgb(28, 28, 28);
+    width: 6px;
+    border-radius: 50px;
+}
+
+QScrollBar::handle:vertical {
+    background: #333333;
+    border-radius: 50px;
+    min-height: 20px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: rgb(28, 28, 28);
+}
+QWidget {
+		background-color: rgb(33, 33, 33);
+	border-radius : 5px;
+}</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_19">
+               <property name="spacing">
+                <number>10</number>
                </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
+               <property name="leftMargin">
+                <number>20</number>
+               </property>
+               <property name="topMargin">
+                <number>20</number>
+               </property>
+               <property name="rightMargin">
+                <number>20</number>
+               </property>
+               <property name="bottomMargin">
+                <number>20</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="taskLayout">
+                 <item>
+                  <widget class="QWidget" name="taskBG" native="true">
+                   <property name="styleSheet">
+                    <string notr="true">QWidget {
+		background-color: rgb(33, 33, 33);
+	border-radius : 5px;
+}</string>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_12">
+                    <item>
+                     <widget class="QScrollArea" name="taskScrollArea">
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton {
+	text-align : left;
+	background : transparent; 
+	border-radius : 5 px;
+	font: 9pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(255, 255, 255);
+	height : 40 px;
+	padding-left:5px;
+	border-radius:5px;
+}
+QPushButton:hover {
+	background-color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
+}
+QPushButton:checked {
+	background-color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
+}
+QScrollArea {
+    border:1px solid #333333;
+}
+
+QScrollBar:vertical {
+    background: rgb(28, 28, 28);
+    width: 6px;
+    border-radius: 50px;
+}
+
+QScrollBar::handle:vertical {
+    background: #333333;
+    border-radius: 50px;
+    min-height: 20px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: rgb(28, 28, 28);
+}</string>
+                      </property>
+                      <property name="widgetResizable">
+                       <bool>true</bool>
+                      </property>
+                      <widget class="QWidget" name="taskScrollAreaLt">
+                       <property name="geometry">
+                        <rect>
+                         <x>0</x>
+                         <y>0</y>
+                         <width>334</width>
+                         <height>443</height>
+                        </rect>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_17">
+                        <property name="leftMargin">
+                         <number>11</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="taskScrollFrame">
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_18">
+                           <item>
+                            <spacer name="spacer_2">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>418</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="newTaskPB_Task">
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton {
 	text-align : left;
 	background : transparent; 
 	border-radius : 5 px;
@@ -725,28 +880,32 @@ QPushButton:checked {
 	background-color: rgb(51, 51, 51);
 	font: 700 9pt &quot;Playwrite DE Grund&quot;;
 }</string>
-               </property>
-               <property name="text">
-                <string>   New Task </string>
-               </property>
-               <property name="icon">
-                <iconset resource="Resources.qrc">
-                 <normaloff>:/Image/Icons/icons8-plus-96.png</normaloff>
-                 <normalon>:/Image/Icons/out_line_circle.png</normalon>:/Image/Icons/icons8-plus-96.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>25</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-               <property name="autoExclusive">
-                <bool>true</bool>
-               </property>
-              </widget>
+                   </property>
+                   <property name="text">
+                    <string>   New Task </string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/icons8-plus-96.png</normaloff>
+                     <normalon>:/Image/Icons/out_line_circle.png</normalon>:/Image/Icons/icons8-plus-96.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>25</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="untitledList">
               <widget class="QPushButton" name="newTaskPB_List">
@@ -995,7 +1154,7 @@ QLineEdit:hover {
 }</string>
                   </property>
                   <property name="text">
-                   <string>Chose Date : </string>
+                   <string>Choose Date : </string>
                   </property>
                   <property name="icon">
                    <iconset resource="Resources.qrc">
