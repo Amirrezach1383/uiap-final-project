@@ -18,5 +18,19 @@
         <file>Image/Icons/out_line_user.png</file>
         <file>Image/Icons/user_account.png</file>
         <file>Image/Icons/icons8-plus-96.png</file>
+        <file>Image/Icons/fill_circle.png</file>
+        <file>Image/Icons/fill_more.png</file>
+        <file>Image/Icons/out_line_circle.png</file>
+        <file>Image/Icons/out_line_more.png</file>
+        <file>Image/Icons/assigned_to_other_fill.png</file>
+        <file>Image/Icons/assigned_to_other_out_line.png</file>
+        <file>Image/Icons/calender.png</file>
+        <file>Image/Icons/down_arrow.png</file>
+        <file>Image/Icons/left_arrow.png</file>
+        <file>Image/Icons/right-arrow.png</file>
+        <file>Image/Icons/save_pdf.png</file>
+        <file>Image/Icons/up_arrow.png</file>
+        <file>Image/Icons/ok.png</file>
+        <file>Image/Icons/assigned_to_other_out_line_color.png</file>
     </qresource>
 </RCC>
