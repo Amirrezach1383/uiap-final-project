@@ -1,7 +1,10 @@
 #include "loginpanel.h"
 #include "ui_loginpanel.h"
 
-LoginPanel::LoginPanel(QWidget *parent) : QMainWindow {parent}, ui(new Ui::LoginPanel) {
+LoginPanel::LoginPanel(std::map<QString, Users> users, QWidget *parent) : QMainWindow {parent}
+    , user(users)
+    , ui(new Ui::LoginPanel) {
+
     ui->setupUi(this);
 }
 

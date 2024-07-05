@@ -27,7 +27,7 @@ void MainPanel::signinPBClicked() {
 
 void MainPanel::loginPBClicked() {
 
-    LoginPanel *panel = new LoginPanel;
+    LoginPanel *panel = new LoginPanel (user);
     this->close();
     panel->show();
 }
