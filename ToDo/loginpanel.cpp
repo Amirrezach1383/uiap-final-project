@@ -24,7 +24,7 @@ void LoginPanel::backPBClicked() {
 }
 void LoginPanel::loginPBClicked() {
     if(allError() == false) {
-        MainToDoPanel *panel = new MainToDoPanel;
+        MainToDoPanel *panel = new MainToDoPanel(user);
         panel->show();
         this->close();
     }

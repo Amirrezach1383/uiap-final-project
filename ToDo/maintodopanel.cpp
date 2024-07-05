@@ -13,6 +13,20 @@ MainToDoPanel::MainToDoPanel(std::map<QString, Users> users,QWidget *parent)
 
     ui->sideTasksMenu->setHidden(true);
 
+    // Connects
+    connect(ui->myDayPB, SIGNAL(clicked()), this, SLOT(myDayPBClicked()));
+    connect(ui->importantPB, SIGNAL(clicked()), this, SLOT(importantPBClicked()));
+    connect(ui->assignedToMePB, SIGNAL(clicked()), this, SLOT(assignedPBClicked()));
+    connect(ui->tasksPB, SIGNAL(clicked()), this, SLOT(taskPBClicked()));
+
+    connect(ui->newListPB, SIGNAL(clicked()), this, SLOT(newListPBClicked()));
+
+    connect(ui->myDayNewTaskPB, SIGNAL(clicked()), this, SLOT(myDayNewTaskPBClicked()));
+    connect(ui->listsNewTaskPB, SIGNAL(clicked()), this, SLOT(listNewTaskPBClicked()));
+
+    connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
+
+
 }
 
 MainToDoPanel::~MainToDoPanel()
@@ -51,19 +65,19 @@ void MainToDoPanel::myDayPBClicked() {
 }
 void MainToDoPanel::importantPBClicked() {
     ui->titleLB->setText("Important");
-    if(ui->myDayPB->isChecked()) {
+    if(ui->importantPB->isChecked()) {
         ui->mainStack->setCurrentIndex(1);
     }
 }
 void MainToDoPanel::assignedPBClicked() {
     ui->titleLB->setText("Assigned To Me");
-    if(ui->myDayPB->isChecked()) {
+    if(ui->assignedToMePB->isChecked()) {
         ui->mainStack->setCurrentIndex(2);
     }
 }
 void MainToDoPanel::taskPBClicked() {
     ui->titleLB->setText("Task");
-    if(ui->myDayPB->isChecked()) {
+    if(ui->tasksPB->isChecked()) {
         ui->mainStack->setCurrentIndex(3);
     }
 }
@@ -74,7 +88,6 @@ void MainToDoPanel::listNewTaskPBClicked() {
     } else {
         ui->sideTasksMenu->setHidden(true);
     }
-
 }
 void MainToDoPanel::myDayNewTaskPBClicked() {
     if(ui->myDayNewTaskPB->isChecked()) {

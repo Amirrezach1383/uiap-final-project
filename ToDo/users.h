@@ -1,6 +1,5 @@
 #include <QString>
 #include <lists.h>
-#include <list>
 
 #ifndef USERS_H
 #define USERS_H

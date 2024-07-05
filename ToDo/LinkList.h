@@ -52,20 +52,20 @@ public:
         headNode = nullptr;
         tailNode = nullptr;
     }
-    LinkList<T>(LinkList & d) {
+    // LinkList<T>(LinkList const& d) {
 
-        this->size = 0;
-        this->headNode = nullptr;
-        this->tailNode = nullptr;
+    //     this->size = 0;
+    //     this->headNode = nullptr;
+    //     this->tailNode = nullptr;
 
-        Node<T> *tmp = d.tailNode;
+    //     Node<T> *tmp = d.tailNode;
 
-        while (tmp != nullptr) {
-            this->pushBack(tmp->getData());
-            tmp = tmp->getNextNode();
-        }
+    //     while (tmp != nullptr) {
+    //         this->pushBack(tmp->getData());
+    //         tmp = tmp->getNextNode();
+    //     }
 
-    }
+    // }
 
     /// Push Back
     void pushBack(T data){
