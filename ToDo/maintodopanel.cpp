@@ -1,8 +1,9 @@
 #include "maintodopanel.h"
 #include "ui_maintodopanel.h"
 
-MainToDoPanel::MainToDoPanel(QWidget *parent)
+MainToDoPanel::MainToDoPanel(std::map<QString, Users> users,QWidget *parent)
     : QMainWindow(parent)
+    , user(users)
     , ui(new Ui::MainToDoPanel) {
     ui->setupUi(this);
 
@@ -19,16 +20,18 @@ MainToDoPanel::~MainToDoPanel()
     delete ui;
 }
 
-void MainToDoPanel::on_newListPB_clicked() {
+// Private Slots
+
+void MainToDoPanel::newListPBClicked() {
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsFrame->layout());
 
-    QString buttonText = tr(" Untitled List %1").arg(frameLayout->count() - 1);
+    QString buttonText = tr("List %1").arg(frameLayout->count());
     QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
 
     QIcon icon (":/Image/Icons/list_icon.png");
     listButton->setIcon(icon);
 
-    QSize size (25, 25);
+    QSize size (20, 20);
     listButton->setIconSize(size);
 
     listButton->setCheckable(true);
@@ -40,62 +43,51 @@ void MainToDoPanel::on_newListPB_clicked() {
 
 }
 
-void MainToDoPanel::on_myDayPB_clicked() {
+void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
-    ui->mainStack->setCurrentIndex(0);
-
+    if(ui->myDayPB->isChecked()) {
+        ui->mainStack->setCurrentIndex(0);
+    }
 }
-
-void MainToDoPanel::on_importantPB_clicked() {
+void MainToDoPanel::importantPBClicked() {
     ui->titleLB->setText("Important");
-    ui->mainStack->setCurrentIndex(1);
-
+    if(ui->myDayPB->isChecked()) {
+        ui->mainStack->setCurrentIndex(1);
+    }
+}
+void MainToDoPanel::assignedPBClicked() {
+    ui->titleLB->setText("Assigned To Me");
+    if(ui->myDayPB->isChecked()) {
+        ui->mainStack->setCurrentIndex(2);
+    }
+}
+void MainToDoPanel::taskPBClicked() {
+    ui->titleLB->setText("Task");
+    if(ui->myDayPB->isChecked()) {
+        ui->mainStack->setCurrentIndex(3);
+    }
 }
 
-void MainToDoPanel::on_assignedToMePB_clicked() {
-    ui->titleLB->setText("Assigned to me");
-    ui->mainStack->setCurrentIndex(2);
-
-}
-
-void MainToDoPanel::on_tasksPB_clicked() {
-    ui->titleLB->setText("Tasks");
-    ui->mainStack->setCurrentIndex(3);
-}
-
-void MainToDoPanel::on_listsButton_0_clicked() {
-    ui->titleLB->setText(ui->listsButton_0->text());
-    ui->mainStack->setCurrentIndex(4);
-}
-
-void MainToDoPanel::on_newTaskPB_myDay_clicked() {
-
-    if(ui->newTaskPB_myDay->isChecked()) {
+void MainToDoPanel::listNewTaskPBClicked() {
+    if(ui->listsNewTaskPB->isChecked()) {
         ui->sideTasksMenu->setVisible(true);
-    } else
+    } else {
         ui->sideTasksMenu->setHidden(true);
-
-
-}
-
-void MainToDoPanel::listPb_clicked () {
+    }
 
 }
-
-void MainToDoPanel::on_newTaskPB_Task_clicked() {
-    if(ui->newTaskPB_Task->isChecked()) {
+void MainToDoPanel::myDayNewTaskPBClicked() {
+    if(ui->myDayNewTaskPB->isChecked()) {
         ui->sideTasksMenu->setVisible(true);
-    } else
+    } else {
         ui->sideTasksMenu->setHidden(true);
+    }
 
 }
 
-void MainToDoPanel::on_newTaskPB_list_clicked() {
-
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-
-    if(button->isChecked()) {
-        ui->sideTasksMenu->setVisible(true);
-    } else
-        ui->sideTasksMenu->setHidden(true);
+void MainToDoPanel::logOutPBClicked() {
+    MainPanel *panel = new MainPanel(user);
+    panel->show();
+    this->close();
 }
+// // // //

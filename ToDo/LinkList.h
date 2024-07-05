@@ -30,7 +30,7 @@ public:
     T getData(){
         return data;
     }
-    Node * getNextNode(){
+    Node* getNextNode(){
         return nextNode;
     }
     Node * getPreviousNode(){
@@ -51,6 +51,20 @@ public:
         size = 0;
         headNode = nullptr;
         tailNode = nullptr;
+    }
+    LinkList<T>(LinkList & d) {
+
+        this->size = 0;
+        this->headNode = nullptr;
+        this->tailNode = nullptr;
+
+        Node<T> *tmp = d.tailNode;
+
+        while (tmp != nullptr) {
+            this->pushBack(tmp->getData());
+            tmp = tmp->getNextNode();
+        }
+
     }
 
     /// Push Back

@@ -34,5 +34,6 @@
         <file>Image/Icons/assigned_to_other_out_line_color.png</file>
         <file>Image/Icons/icons8-tick-50.png</file>
         <file>Image/Icons/icons8-tick-100.png</file>
+        <file>Image/Icons/icons8-shutdown-72.png</file>
     </qresource>
 </RCC>

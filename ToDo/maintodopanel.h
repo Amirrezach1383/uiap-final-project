@@ -2,6 +2,8 @@
 #define MAINTODOPANEL_H
 
 #include <QMainWindow>
+#include <mainpanel.h>
+
 
 namespace Ui {
 class MainToDoPanel;
@@ -12,31 +14,24 @@ class MainToDoPanel : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainToDoPanel(QWidget *parent = nullptr);
+    std::map<QString, Users> user;
+
+    explicit MainToDoPanel(std::map<QString, Users>, QWidget *parent = nullptr);
     ~MainToDoPanel();
 
     void unCheckedPB ();
 
 private slots:
-    void on_newListPB_clicked();
+    void newListPBClicked();
+    void listNewTaskPBClicked();
+    void myDayNewTaskPBClicked();
 
-    void on_myDayPB_clicked();
+    void myDayPBClicked();
+    void importantPBClicked();
+    void assignedPBClicked();
+     void taskPBClicked();
 
-    void on_importantPB_clicked();
-
-    void on_assignedToMePB_clicked();
-
-    void on_tasksPB_clicked();
-
-    void on_listsButton_0_clicked();
-
-    void on_newTaskPB_myDay_clicked();
-
-    void listPb_clicked();
-
-    void on_newTaskPB_Task_clicked();
-
-    void on_newTaskPB_list_clicked();
+    void logOutPBClicked();
 
 private:
     Ui::MainToDoPanel *ui;
