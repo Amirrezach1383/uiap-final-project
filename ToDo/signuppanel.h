@@ -5,6 +5,7 @@
 #include <users.h>
 #include <QtSql>
 #include <QFileInfo>
+#include <mainpanel.h>
 
 namespace Ui {
 class SignUpPanel;
@@ -35,6 +36,7 @@ public:
 
 private slots:
     void signUpPBClicked();
+    void backPBClicked();
 
 private:
     QSqlDatabase toDoDB;

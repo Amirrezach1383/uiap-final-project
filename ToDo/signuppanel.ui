@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="cursor">
-   <cursorShape>PointingHandCursor</cursorShape>
+   <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -55,7 +55,7 @@ QPushButton {
 
 QLabel {
 	font: 8pt &quot;Playwrite DE Grund&quot;;
-	color: rgb(161, 0, 3);
+	color: #ed4337;
 }
 
 </string>
@@ -173,53 +173,53 @@ QLabel {
    <widget class="QLabel" name="firstNameErrorLB">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>447</x>
       <y>221</y>
-      <width>191</width>
+      <width>250</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Errors </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="lastNameErrorLB">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>300</y>
-      <width>191</width>
+      <x>447</x>
+      <y>304</y>
+      <width>260</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Errors </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="usernameErrorLB">
     <property name="geometry">
      <rect>
-      <x>421</x>
+      <x>446</x>
       <y>390</y>
-      <width>191</width>
+      <width>290</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Errors </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="passwordErrorLB">
     <property name="geometry">
      <rect>
-      <x>426</x>
-      <y>480</y>
-      <width>191</width>
+      <x>445</x>
+      <y>472</y>
+      <width>250</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Errors </string>
+     <string/>
     </property>
    </widget>
   </widget>

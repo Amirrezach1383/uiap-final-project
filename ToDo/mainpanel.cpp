@@ -4,14 +4,14 @@
 #include <loginpanel.h>
 #include <signuppanel.h>
 
-MainPanel::MainPanel(std::map<QString, Users> users,QWidget *parent) : QMainWindow(parent)
+MainPanel::MainPanel(std::map<QString, Users> users, QWidget *parent) : QMainWindow(parent)
     , user(users)
     , ui(new Ui::MainPanel) {
 
     ui->setupUi(this);
 
     connect(ui->signinPB, SIGNAL(clicked()), this, SLOT(signinPBClicked()));
-    connect(ui->signinPB, SIGNAL(clicked()), this, SLOT(logininPBClicked()));
+    connect(ui->loginPB, SIGNAL(clicked()), this, SLOT(loginPBClicked()));
 }
 
 MainPanel::~MainPanel() {

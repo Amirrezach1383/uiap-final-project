@@ -10,6 +10,7 @@ SignUpPanel::SignUpPanel(std::map<QString, Users> users, QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->signUpPB, SIGNAL(clicked()), this, SLOT(signUpPBClicked()));
+    connect(ui->backPB, SIGNAL(clicked()), this, SLOT(backPBClicked()));
 }
 
 SignUpPanel::~SignUpPanel() {
@@ -19,19 +20,22 @@ SignUpPanel::~SignUpPanel() {
 // Error Functions
 
 bool SignUpPanel::allErrors() {
+
+    bool error = false;
+
     if (usernameErrors())
-        return true;
+        error = true;
 
     if (lastNameErrors())
-        return true;
+        error = true;
 
     if (firstNameErrors())
-        return true;
+        error = true;
 
     if(passwordErrors())
-        return true;
+        error = true;
 
-    return false;
+    return error;
 }
 
 bool SignUpPanel::usernameErrors () {
@@ -44,7 +48,7 @@ bool SignUpPanel::usernameErrors () {
 
     int i = 0;
     while(i < username.length()) {
-        if((username[i] >= 'A' && username[i] <= 'Z') || ((username[i] >= 'a' && username[i] <= 'z'))) {
+        if((username[i] >= 'A' && username[i] <= 'Z') || ((username[i] >= 'a' && username[i] <= 'z')) || (username[i] >= '0' && username[i] <= '9')) {
             i++;
             continue;
         }
@@ -136,7 +140,7 @@ bool SignUpPanel::passwordErrors () {
 
     int i = 0;
     while(i < password.length()) {
-        if((password[i] >= 'A' && password[i] <= 'Z') || ((password[i] >= 'a' && password[i] <= 'z'))) {
+        if((password[i] >= 'A' && password[i] <= 'Z') || ((password[i] >= 'a' && password[i] <= 'z')) || (password[i] >= '0' && password[i] <= '9')) {
             i++;
             continue;
         }
@@ -197,17 +201,27 @@ void SignUpPanel::signUpPBClicked() {
                 msgBox.setWindowTitle(tr("Confirm Data"));
                 msgBox.setText(tr("Successfully registered !"));
 
-                QPixmap pixmap(":/Image/Icons/icons8-tick-100.png");
+                QPixmap pixmap(":/Image/Icons/icons8-tick-50.png");
                 msgBox.setIconPixmap(pixmap);
 
                 msgBox.exec();
                 conClose();
+
+                MainPanel *panel = new MainPanel(user);
+                panel->show();
+                this->close();
             } else {
                 QMessageBox::critical(this, tr("Error"), qry.lastError().text());
             }
         }
     }
 }
+void SignUpPanel::backPBClicked() {
+    MainPanel *panel = new MainPanel(user);
+    panel->show();
+    this->close();
+}
+
 
 // DataBase Control
 void SignUpPanel::conClose() {

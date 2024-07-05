@@ -48,7 +48,13 @@ QPushButton {
 	border: none;
 	font: 12pt &quot;Playwrite DE Grund&quot;;
 	color: rgb(154, 124, 175);
-}</string>
+}
+
+QLabel {
+	font: 8pt &quot;Playwrite DE Grund&quot;;
+	color: #ed4337;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="loginPB">
@@ -121,7 +127,7 @@ QPushButton {
      <string/>
     </property>
     <property name="icon">
-     <iconset>
+     <iconset resource="Resources.qrc">
       <normaloff>:/Image/backPB.png</normaloff>:/Image/backPB.png</iconset>
     </property>
     <property name="iconSize">
@@ -131,8 +137,36 @@ QPushButton {
      </size>
     </property>
    </widget>
+   <widget class="QLabel" name="usernameErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>181</x>
+      <y>330</y>
+      <width>211</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="passwordErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>181</x>
+      <y>411</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <users.h>
+#include <mainpanel.h>
+#include <QMessageBox>
+#include <maintodopanel.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -13,12 +16,24 @@ QT_END_NAMESPACE
 class LoginPanel : public QMainWindow
 {
     Q_OBJECT
+private slots:
+    void loginPBClicked ();
+    void backPBClicked ();
+
 
 public:
+    std::map<QString, Users> user;
+
     LoginPanel(std::map<QString, Users>, QWidget *parent = nullptr);
     ~LoginPanel();
 
-    std::map<QString, Users> user;
+    bool allError();
+
+    bool usernameErrors ();
+    bool passwordErrors ();
+
+
+
 private:
     Ui::LoginPanel *ui;
 };
