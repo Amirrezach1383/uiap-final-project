@@ -31,8 +31,8 @@ public:
     // // //
 
     // DataBase Control
-    bool conOpen ();
-    void conClose ();
+    bool openDB ();
+    void closeDB ();
 
 private slots:
     void signUpPBClicked();

@@ -13,18 +13,20 @@ public:
     void setPassword (QString);
     void setFirstName (QString);
     void setLastName (QString);
+    void addToLists (Lists);
 
     QString getUsername ();
     QString getPassword ();
     QString getFirstName ();
     QString getLastName ();
+    Lists getLiset(int);
 
-    std::list<Lists> taskLists;
 private:
     QString username;
     QString password;
     QString firstName;
     QString lastName;
+    std::list<Lists> lists;
 
 
 

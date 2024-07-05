@@ -8,12 +8,19 @@ class Lists
 {
 public:
     Lists();
+
+    void setListID (int);
+    void setUsername (QString);
+    void setTitle (QString);
+    void setColor (QString);
+    void addTaskList (Task);
+
 private:
     int listID;
     QString username;
     QString title;
     QString color;
-    LinkList<Task> listTask;
+    LinkList<Task> taskList;
 };
 
 #endif // LISTS_H

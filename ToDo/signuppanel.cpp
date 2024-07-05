@@ -192,7 +192,7 @@ void SignUpPanel::signUpPBClicked() {
 
         user[username] = user_tmp;
 
-        if(conOpen()) {
+        if(openDB()) {
             QSqlQuery qry;
             qry.prepare("INSERT INTO Users (Username, Password, FirstName, LastName) VALUES ('"+username+"', '"+password+"', '"+firstName+"', '"+lastName+"')");
 
@@ -205,7 +205,7 @@ void SignUpPanel::signUpPBClicked() {
                 msgBox.setIconPixmap(pixmap);
 
                 msgBox.exec();
-                conClose();
+                closeDB();
 
                 MainPanel *panel = new MainPanel(user);
                 panel->show();
@@ -224,11 +224,11 @@ void SignUpPanel::backPBClicked() {
 
 
 // DataBase Control
-void SignUpPanel::conClose() {
+void SignUpPanel::closeDB() {
     toDoDB.close();
     toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
 }
-bool SignUpPanel::conOpen () {
+bool SignUpPanel::openDB() {
     toDoDB = QSqlDatabase::addDatabase("QSQLITE");
     toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
 
