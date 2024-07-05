@@ -2,6 +2,7 @@
 #define MAINPANEL_H
 
 #include <QMainWindow>
+#include <users.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,10 +18,10 @@ public:
     MainPanel(QWidget *parent = nullptr);
     ~MainPanel();
 
-
+    std::map<QString, Users> user;
 private slots:
-    void on_signinPB_clicked();
-    void on_loginPB_clicked();
+    void signinPBClicked();
+    void loginPBClicked();
 
 
 private:

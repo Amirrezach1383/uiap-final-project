@@ -9,6 +9,10 @@
 class Users {
 public:
     Users();
+
+
+
+
 private:
     QString username;
     QString password;
@@ -16,7 +20,7 @@ private:
     QString lastName;
     std::list<Lists> taskLists;
 
-    std::map <QString, Users> user;
+
 };
 
 #endif // USERS_H

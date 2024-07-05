@@ -53,6 +53,11 @@ QPushButton {
 	color: rgb(154, 124, 175);
 }
 
+QLabel {
+	font: 8pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(161, 0, 3);
+}
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -155,7 +160,7 @@ QPushButton {
      <string/>
     </property>
     <property name="icon">
-     <iconset>
+     <iconset resource="Resources.qrc">
       <normaloff>:/Image/backPB.png</normaloff>:/Image/backPB.png</iconset>
     </property>
     <property name="iconSize">
@@ -165,8 +170,62 @@ QPushButton {
      </size>
     </property>
    </widget>
+   <widget class="QLabel" name="firstNameErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>221</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Errors </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lastNameErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>300</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Errors </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="usernameErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>421</x>
+      <y>390</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Errors </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="passwordErrorLB">
+    <property name="geometry">
+     <rect>
+      <x>426</x>
+      <y>480</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Errors </string>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
