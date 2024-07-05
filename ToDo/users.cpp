@@ -1,3 +1,31 @@
 #include "users.h"
 
 Users::Users() {}
+
+
+void Users::setUsername (QString d) {
+    username = d;
+}
+void Users::setPassword (QString d) {
+    password = d;
+}
+void Users::setFirstName (QString d) {
+    firstName = d;
+}
+void Users::setLastName (QString d) {
+    lastName = d;
+}
+
+
+QString Users::getUsername () {
+    return username;
+}
+QString Users::getPassword () {
+    return password;
+}
+QString Users::getFirstName () {
+    return firstName;
+}
+QString Users::getLastName () {
+    return lastName;
+}

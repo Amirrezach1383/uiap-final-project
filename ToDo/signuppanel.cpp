@@ -168,17 +168,18 @@ bool SignUpPanel::passwordErrors () {
 void SignUpPanel::signUpPBClicked() {
 
     if(allErrors() == false) {
-        QString userName = ui->usernameLE->text();
+        QString username = ui->usernameLE->text();
         QString lastName = ui->lastNameLE->text();
         QString firstName = ui->firstNameLE->text();
         QString password = ui->passwordLE->text();
 
         Users user_tmp;
+        user_tmp.setUsername(username);
+        user_tmp.setLastName(lastName);
+        user_tmp.setFirstName(firstName);
+        user_tmp.setPassword(password);
 
-
-
-
-
+        user[username] = user_tmp;
     }
 }
 
