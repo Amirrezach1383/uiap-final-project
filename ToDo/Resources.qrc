@@ -32,5 +32,7 @@
         <file>Image/Icons/up_arrow.png</file>
         <file>Image/Icons/ok.png</file>
         <file>Image/Icons/assigned_to_other_out_line_color.png</file>
+        <file>Image/Icons/icons8-tick-50.png</file>
+        <file>Image/Icons/icons8-tick-100.png</file>
     </qresource>
 </RCC>

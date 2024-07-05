@@ -15,7 +15,7 @@ class MainPanel : public QMainWindow
     Q_OBJECT
 
 public:
-    MainPanel(QWidget *parent = nullptr);
+    MainPanel(std::map<QString, Users> users, QWidget *parent = nullptr);
     ~MainPanel();
 
     std::map<QString, Users> user;

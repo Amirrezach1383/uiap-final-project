@@ -1,5 +1,6 @@
 #include "signuppanel.h"
 #include "ui_signuppanel.h"
+#include <QMessageBox>
 
 
 SignUpPanel::SignUpPanel(std::map<QString, Users> users, QWidget *parent)
@@ -14,6 +15,8 @@ SignUpPanel::SignUpPanel(std::map<QString, Users> users, QWidget *parent)
 SignUpPanel::~SignUpPanel() {
     delete ui;
 }
+
+// Error Functions
 
 bool SignUpPanel::allErrors() {
     if (usernameErrors())
@@ -165,6 +168,10 @@ bool SignUpPanel::passwordErrors () {
     return false;
 }
 
+// // //
+
+
+// Private Slots
 void SignUpPanel::signUpPBClicked() {
 
     if(allErrors() == false) {
@@ -180,7 +187,41 @@ void SignUpPanel::signUpPBClicked() {
         user_tmp.setPassword(password);
 
         user[username] = user_tmp;
+
+        if(conOpen()) {
+            QSqlQuery qry;
+            qry.prepare("INSERT INTO Users (Username, Password, FirstName, LastName) VALUES ('"+username+"', '"+password+"', '"+firstName+"', '"+lastName+"')");
+
+            if (qry.exec()) {
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Confirm Data"));
+                msgBox.setText(tr("Successfully registered !"));
+
+                QPixmap pixmap(":/Image/Icons/icons8-tick-100.png");
+                msgBox.setIconPixmap(pixmap);
+
+                msgBox.exec();
+                conClose();
+            } else {
+                QMessageBox::critical(this, tr("Error"), qry.lastError().text());
+            }
+        }
     }
 }
+
+// DataBase Control
+void SignUpPanel::conClose() {
+    toDoDB.close();
+    toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
+}
+bool SignUpPanel::conOpen () {
+    toDoDB = QSqlDatabase::addDatabase("QSQLITE");
+    toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
+
+    if(toDoDB.open())
+        return true;
+    return false;
+}
+
 
 
