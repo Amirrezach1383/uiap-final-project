@@ -27,11 +27,12 @@ public:
     LoginPanel(std::map<QString, Users>, QWidget *parent = nullptr);
     ~LoginPanel();
 
+    // Errors Functions
     bool allError();
-
     bool usernameErrors ();
     bool passwordErrors ();
 
+    void openAndSetMessageBox ();
 
 
 private:

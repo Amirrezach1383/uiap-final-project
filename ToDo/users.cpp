@@ -37,5 +37,5 @@ Lists Users::getLists(int listID) {
         if(it->getListID() == listID)
             return *it;
     }
-    return *new Lists;
+    return Lists();
 }

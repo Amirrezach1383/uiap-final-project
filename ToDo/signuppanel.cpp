@@ -58,7 +58,7 @@ bool SignUpPanel::usernameErrors () {
         }
         ui->usernameErrorLB->setText("Invalid data");
         return true;
-        }
+    }
 
     if(username.length() <= 3) {
         ui->usernameErrorLB->setText("Invalid data");
@@ -179,49 +179,65 @@ bool SignUpPanel::passwordErrors () {
 void SignUpPanel::signUpPBClicked() {
 
     if(allErrors() == false) {
-        QString username = ui->usernameLE->text();
-        QString lastName = ui->lastNameLE->text();
-        QString firstName = ui->firstNameLE->text();
-        QString password = ui->passwordLE->text();
 
-        Users user_tmp;
-        user_tmp.setUsername(username);
-        user_tmp.setLastName(lastName);
-        user_tmp.setFirstName(firstName);
-        user_tmp.setPassword(password);
-
-        user[username] = user_tmp;
-
-        if(openDB()) {
-            QSqlQuery qry;
-            qry.prepare("INSERT INTO Users (Username, Password, FirstName, LastName) VALUES ('"+username+"', '"+password+"', '"+firstName+"', '"+lastName+"')");
-
-            if (qry.exec()) {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Confirm Data"));
-                msgBox.setText(tr("Successfully registered !"));
-
-                QPixmap pixmap(":/Image/Icons/icons8-tick-50.png");
-                msgBox.setIconPixmap(pixmap);
-
-                msgBox.exec();
-                closeDB();
-
-                MainPanel *panel = new MainPanel(user);
-                panel->show();
-                this->close();
-            } else {
-                QMessageBox::critical(this, tr("Error"), qry.lastError().text());
-            }
-        }
+        Users tmp;
+        getAndSetData(tmp);
+        setDataINDB(tmp);
     }
 }
+
 void SignUpPanel::backPBClicked() {
     MainPanel *panel = new MainPanel(user);
     panel->show();
     this->close();
 }
 
+// // // //
+
+void SignUpPanel::getAndSetData(Users &user_tmp) {
+
+    QString username = ui->usernameLE->text();
+    QString lastName = ui->lastNameLE->text();
+    QString firstName = ui->firstNameLE->text();
+    QString password = ui->passwordLE->text();
+
+    user_tmp.setUsername(username);
+    user_tmp.setLastName(lastName);
+    user_tmp.setFirstName(firstName);
+    user_tmp.setPassword(password);
+
+    user[username] = user_tmp;
+
+}
+void SignUpPanel::setDataINDB(Users &usertmp) {
+    if(openDB()) {
+        QSqlQuery qry;
+        qry.prepare("INSERT INTO Users (Username, Password, FirstName, LastName) VALUES ('"+usertmp.getUsername()+"', '"+usertmp.getPassword()+"', '"+usertmp.getFirstName()+"', '"+usertmp.getLastName()+"')");
+
+        if (qry.exec()) {
+
+            openAndSetMessageBox();
+            closeDB();
+
+            MainPanel *panel = new MainPanel(user);
+            panel->show();
+            this->close();
+        } else {
+            QMessageBox::critical(this, tr("Error"), qry.lastError().text());
+        }
+    }
+}
+
+void SignUpPanel::openAndSetMessageBox() {
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Confirm Data"));
+    msgBox.setText(tr("Successfully registered !"));
+
+    QPixmap pixmap(":/Image/Icons/icons8-tick-50.png");
+    msgBox.setIconPixmap(pixmap);
+
+    msgBox.exec();
+}
 
 // DataBase Control
 void SignUpPanel::closeDB() {
@@ -236,6 +252,4 @@ bool SignUpPanel::openDB() {
         return true;
     return false;
 }
-
-
 

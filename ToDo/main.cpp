@@ -1,4 +1,5 @@
 #include "mainpanel.h"
+#include "maintodopanel.h"
 #include <QApplication>
 #include <QtSql>
 
@@ -25,7 +26,8 @@ int main(int argc, char *argv[]) {
     } else
         return 0;
 
-    MainPanel w(*new std::map <QString, Users>);
+    // MainPanel w(user);
+    MainToDoPanel w;
     w.show();
 
     return a.exec();

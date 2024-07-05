@@ -38,5 +38,5 @@ Task Lists::getTask (int taskID) {
             return tmp->getData();
         tmp = tmp->getNextNode();
     }
-    return *new Task;
+    return Task();
 }

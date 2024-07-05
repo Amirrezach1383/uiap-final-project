@@ -24,21 +24,24 @@ void LoginPanel::backPBClicked() {
 }
 void LoginPanel::loginPBClicked() {
     if(allError() == false) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Confirm Data"));
-        msgBox.setText(tr("Successfully Login!"));
-
-        QPixmap pixmap(":/Image/Icons/icons8-tick-100.png");
-        msgBox.setIconPixmap(pixmap);
-
-        msgBox.exec();
-
         MainToDoPanel *panel = new MainToDoPanel;
         panel->show();
         this->close();
     }
 }
 
+void LoginPanel::openAndSetMessageBox () {
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Confirm Data"));
+    msgBox.setText(tr("Successfully Login!"));
+    QPixmap pixmap(":/Image/Icons/icons8-tick-50.png");
+    msgBox.setIconPixmap(pixmap);
+
+    msgBox.exec();
+
+}
+
+// Error Functions
 bool LoginPanel::allError() {
     bool error = false;
     if(usernameErrors())

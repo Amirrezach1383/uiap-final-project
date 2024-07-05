@@ -34,6 +34,11 @@ public:
     bool openDB ();
     void closeDB ();
 
+    void getAndSetData (Users&);
+    void setDataINDB (Users&);
+
+    void openAndSetMessageBox ();
+
 private slots:
     void signUpPBClicked();
     void backPBClicked();
