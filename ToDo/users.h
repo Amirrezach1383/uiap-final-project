@@ -19,7 +19,7 @@ public:
     QString getPassword ();
     QString getFirstName ();
     QString getLastName ();
-    Lists getLiset(int);
+    Lists getLists(int);
 
 private:
     QString username;
