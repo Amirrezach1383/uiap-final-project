@@ -13,6 +13,7 @@ public:
     void setFirstName (QString);
     void setLastName (QString);
     void addToLists (Lists);
+    void setLists (int, Lists);
 
     QString getUsername ();
     QString getPassword ();

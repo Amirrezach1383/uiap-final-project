@@ -40,10 +40,14 @@ public:
 
     void addNewListToUsersList (Lists&);
 
+    void setListsBackGround (Color);
+
 
 private slots:
     void newListPBClicked();
     void listButtonClicked();
+
+    void taskCompletePBClicked();
 
     void listNewTaskPBClicked();
     void myDayNewTaskPBClicked();

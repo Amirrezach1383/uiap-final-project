@@ -15,7 +15,18 @@ void Lists::setColor (Color d) {
     color = d;
 }
 void Lists::addTask (Task d) {
+    d.setTaskID(taskList.getSize() + 1);
+    d.setListID(listID);
     taskList << d;
+}
+void Lists::setTask(int taskID, Task task) {
+    Node<Task>* tmp = taskList.getHeadNode();
+
+    while(tmp){
+        if(tmp->getData().getTaskID() == taskID) {
+            tmp->setData(task);
+        }
+    }
 }
 
 QString Lists::getUsername () {

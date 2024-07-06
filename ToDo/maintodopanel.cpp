@@ -27,11 +27,21 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
 
+
+
 }
 
 MainToDoPanel::~MainToDoPanel()
 {
     delete ui;
+}
+
+void MainToDoPanel::unCheckedPB() {
+
+    ui->myDayPB->setChecked(false);
+    ui->assignedToMePB->setChecked(false);
+    ui->tasksPB->setChecked(false);
+    ui->importantPB->setChecked(false);
 }
 
 // Private Slots
@@ -63,9 +73,42 @@ void MainToDoPanel::newListPBClicked() {
 }
 void MainToDoPanel::listButtonClicked() {
     QPushButton* listButton = qobject_cast<QPushButton*>(sender());
+
+    unCheckedPB();
+
+    ui->mainStack->setCurrentIndex(ui->mainStack->indexOf(ui->Lists));
+    ui->titleLB->setText(listButton->text());
+
     Lists selectedList = listButtonMap[listButton];
+
+    Color c = selectedList.getColor();
+    setListsBackGround(c);
+
+    ui->listsBKG->setStyleSheet("");
     setListsTaskInfo(selectedList);
 
+}
+
+void MainToDoPanel::taskCompletePBClicked() {
+    QPushButton *completeTask = qobject_cast<QPushButton*>(sender());
+
+    Users userTmp = user[loginUsername];
+    Task taskTmp = taskButtonMap[completeTask];
+
+    int listID = taskTmp.getListID();
+    Lists tmpList = userTmp.getLists(listID);
+
+    if(completeTask->isChecked()) {
+        taskTmp.setCompleted(true);
+    } else {
+        taskTmp.setCompleted(false);
+    }
+
+    tmpList.setTask(taskTmp.getTaskID(), taskTmp);
+    userTmp.setLists(listID, tmpList);
+    user[loginUsername] = userTmp;
+
+    taskButtonMap[completeTask] = taskTmp;
 }
 
 void MainToDoPanel::myDayPBClicked() {
@@ -122,10 +165,7 @@ void MainToDoPanel::setUsersInfoInPanel () {
 
     ui->userInfoLB->setText(loginUsername);
 
-    setUsersListInfo();
-    setUsersAssignedInfo();
-    setUsersTasksInfo();
-    setUsersMyDayInfo();
+
 }
 
 void MainToDoPanel::setUsersListInfo () {
@@ -161,7 +201,6 @@ void MainToDoPanel::addUsersListPB (Lists& list) {
     connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
 }
 
-
 void MainToDoPanel::setUsersTasksInfo () {
     Users userTmp = user[loginUsername];
 
@@ -195,6 +234,15 @@ void MainToDoPanel::addListsTaskItems(Task task) {
 
 
     QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
+    QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
+
+    QIcon starFillIcon (":/Image/Icons/fill_star_color.png");
+    QIcon starOutLineIcon (":/Image/Icons/out_line_star.png");
+
+    if(task.getFavorite())
+        star->setIcon(starFillIcon);
+    if(!task.getFavorite())
+        star->setIcon(starOutLineIcon);
 
     QIcon icon (":/Image/Icons/out_line_circle.png");
     completePB->setIcon(icon);
@@ -213,8 +261,9 @@ void MainToDoPanel::addListsTaskItems(Task task) {
         completePB->setChecked(false);
     }
 
-    itemLayout->insertWidget(0, taskLabel);
-    itemLayout->insertWidget(0, completePB);
+    itemLayout->insertWidget(0, star);
+    itemLayout->insertWidget(1, taskLabel);
+    itemLayout->insertWidget(2, completePB);
 
     itemLayout->setContentsMargins(10, 1, 20, 0);
     itemLayout->setSpacing(0);
@@ -223,7 +272,60 @@ void MainToDoPanel::addListsTaskItems(Task task) {
 
     taskButtonMap.insert(completePB, task);
 
-    // connect ()
+    connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+}
+
+void MainToDoPanel::setListsBackGround(Color c) {
+
+    if(c == Blue) {
+        ui->listsBKG->setStyleSheet(
+        "QWidget {"
+            "background-color: rgb(66, 56, 246);"
+            "border-radius : 5px;"
+                "}"
+            );
+
+    }
+    if(c == Red) {
+        ui->listsBKG->setStyleSheet(
+            "QWidget {"
+            "background-color:  rgb(113, 54, 38);"
+            "border-radius : 5px;"
+            "}"
+            );
+    }
+    if(c == Green) {
+        ui->listsBKG->setStyleSheet(
+            "QWidget {"
+            "background-color: rgb(12, 119, 18 );"
+            "border-radius : 5px;"
+            "}"
+            );
+    }
+    if(c == Yellow) {
+        ui->listsBKG->setStyleSheet(
+            "QWidget {"
+            "background-color: rgb(212, 178, 2);"
+            "border-radius : 5px;"
+            "}"
+            );
+    }
+    if(c == Black) {
+        ui->listsBKG->setStyleSheet(
+            "QWidget {"
+            "background-color: rgb(18, 13, 13);"
+            "border-radius : 5px;"
+            "}"
+            );
+    }
+    if(c == Default) {
+        ui->listsBKG->setStyleSheet(
+            "QWidget {"
+            "background-color: rgb(33, 33, 33);"
+            "border-radius : 5px;"
+            "}"
+            );
+    }
 }
 
 // Add functions
