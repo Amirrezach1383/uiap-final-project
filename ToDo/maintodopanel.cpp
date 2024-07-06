@@ -53,7 +53,7 @@ void MainToDoPanel::newListPBClicked() {
 
     frameLayout->insertWidget(frameLayout->count() - 1, listButton);
 
-    connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
+    // connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
 
 }
 

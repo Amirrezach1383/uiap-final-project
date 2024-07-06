@@ -5,7 +5,7 @@
 #define LISTS_H
 
 enum Color {
-    Blue, Red, Green, Yellow, Black
+    Default, Blue, Red, Green, Yellow, Black
 };
 
 class Lists
@@ -31,6 +31,8 @@ private:
     QString title;
     Color color;
     LinkList<Task> taskList;
+
+    bool selected;
 };
 
 #endif // LISTS_H

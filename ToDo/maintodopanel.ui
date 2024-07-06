@@ -438,10 +438,10 @@ QPushButton:hover {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>284</x>
       <y>0</y>
-      <width>811</width>
-      <height>671</height>
+      <width>815</width>
+      <height>670</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="mainFrameLYT_Main">
@@ -523,7 +523,7 @@ border-radius : 5px;
 </string>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>4</number>
             </property>
             <widget class="QWidget" name="myDay">
              <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -605,8 +605,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>334</width>
-                        <height>472</height>
+                        <width>64</width>
+                        <height>44</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -773,8 +773,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>334</width>
-                        <height>519</height>
+                        <width>64</width>
+                        <height>44</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -898,7 +898,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                         <x>0</x>
                         <y>0</y>
                         <width>334</width>
-                        <height>519</height>
+                        <height>518</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1151,7 +1151,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              </layout>
             </widget>
             <widget class="QWidget" name="Lists">
-             <layout class="QVBoxLayout" name="verticalLayout_13">
+             <layout class="QVBoxLayout" name="verticalLayout_2">
               <property name="spacing">
                <number>10</number>
               </property>
@@ -1167,6 +1167,127 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="bottomMargin">
                <number>20</number>
               </property>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="spacing">
+                 <number>25</number>
+                </property>
+                <property name="leftMargin">
+                 <number>2</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>15</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>2</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background: transparent;
+border: none;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="Resources.qrc">
+                    <normaloff>:/Image/Icons/save_pdf.png</normaloff>:/Image/Icons/save_pdf.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>30</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox">
+                  <property name="styleSheet">
+                   <string notr="true">QComboBox::down-arrow {
+	border-image: url(:/Image/Icons/fill_more100.png);
+  	width:25px; 
+    height:25px; 
+	background: transparent;
+	border:none;
+}
+QComboBox::drop-down {
+	background: transparent;
+    subcontrol-position: top right;
+    width: 40px;
+}
+QComboBox {
+	font: 8pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(255, 255, 255);
+}
+QComboBox QAbstractItemView {
+    border: 2px solid black;
+    selection-background-color: rgb(51, 51, 51);
+}
+</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Default</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/default.png</normaloff>:/Image/Icons/default.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Blue</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/blue.png</normaloff>:/Image/Icons/blue.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Green</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/green.png</normaloff>:/Image/Icons/green.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Black</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/black.png</normaloff>:/Image/Icons/black.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Yellow</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Resources.qrc">
+                     <normaloff>:/Image/Icons/yellow.png</normaloff>:/Image/Icons/yellow.png</iconset>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item>
                <layout class="QVBoxLayout" name="listsLYT_Main">
                 <property name="spacing">
@@ -1255,7 +1376,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                         <x>0</x>
                         <y>0</y>
                         <width>334</width>
-                        <height>472</height>
+                        <height>428</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -1409,6 +1530,9 @@ QLineEdit:hover {
              </property>
              <item>
               <widget class="QPushButton" name="completePB">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
 	text-align : left;
@@ -1454,6 +1578,9 @@ QLineEdit:hover {
              </item>
              <item>
               <widget class="QPushButton" name="favPB">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
 	text-align : left;

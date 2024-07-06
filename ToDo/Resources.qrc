@@ -35,5 +35,12 @@
         <file>Image/Icons/icons8-tick-50.png</file>
         <file>Image/Icons/icons8-tick-100.png</file>
         <file>Image/Icons/icons8-shutdown-72.png</file>
+        <file>Image/Icons/fill_more100.png</file>
+        <file>Image/Icons/black.png</file>
+        <file>Image/Icons/blue.png</file>
+        <file>Image/Icons/default.png</file>
+        <file>Image/Icons/red.png</file>
+        <file>Image/Icons/yellow.png</file>
+        <file>Image/Icons/green.png</file>
     </qresource>
 </RCC>
