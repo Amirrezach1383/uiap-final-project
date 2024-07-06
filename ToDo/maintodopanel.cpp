@@ -306,6 +306,14 @@ void MainToDoPanel::addNewListToUsersList (Lists& newList) {
 void MainToDoPanel::addNewTaskItem (Task& task) {
 
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
+    QWidget *widget = new QWidget;
+
+    widget->setStyleSheet(
+        "QWidget {"
+        "background-color: rgb(50, 50, 50);"
+        "border-radius : 5px;"
+        "}"
+        );
 
     QHBoxLayout *itemLayout = new QHBoxLayout;
     QString labelTitle = ui->taskNameLE->text();
@@ -326,8 +334,6 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
     QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
     QIcon circleFill (":/Image/Icons/fill_circle.png");
     completePB->setIcon(circleOutLine);
-
-
 
     QSize size(20, 20);
     completePB->setIconSize(size);
@@ -352,7 +358,9 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
     itemLayout->setContentsMargins(10, 1, 20, 0);
     itemLayout->setSpacing(0);
 
-    frameLayout->insertLayout(0, itemLayout);
+    widget->setLayout(itemLayout);
+
+    frameLayout->insertWidget(0, widget);
 
     taskButtonMap.insert(completePB, task);
 
