@@ -34,7 +34,11 @@ public:
     void setUsersTasksInfo ();
     void setUsersMyDayInfo ();
     void setUsersAssignedInfo ();
-    void setListsTaskInfo ();
+
+    void setListsTaskInfo (Lists&);
+    void addListsTaskItems(Task);
+
+    void addNewListToUsersList (Lists&);
 
 
 private slots:
@@ -47,7 +51,7 @@ private slots:
     void myDayPBClicked();
     void importantPBClicked();
     void assignedPBClicked();
-     void taskPBClicked();
+    void taskPBClicked();
 
     void logOutPBClicked();
 

@@ -24,6 +24,7 @@ public:
     Color getColor ();
     int getListID ();
     Task getTask (int);
+    LinkList<Task> getTask();
 
 private:
     int listID;
@@ -31,8 +32,6 @@ private:
     QString title;
     Color color;
     LinkList<Task> taskList;
-
-    bool selected;
 };
 
 #endif // LISTS_H

@@ -40,3 +40,6 @@ Task Lists::getTask (int taskID) {
     }
     return Task();
 }
+LinkList<Task> Lists::getTask() {
+    return taskList;
+}

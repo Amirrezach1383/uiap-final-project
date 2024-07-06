@@ -57,15 +57,16 @@ void MainToDoPanel::newListPBClicked() {
     frameLayout->insertWidget(frameLayout->count() - 1, listButton);
 
     listButtonMap.insert(listButton, newList);
+    addNewListToUsersList(newList);
 
-    connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
-
+    connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
 }
 void MainToDoPanel::listButtonClicked() {
+    QPushButton* listButton = qobject_cast<QPushButton*>(sender());
+    Lists selectedList = listButtonMap[listButton];
+    setListsTaskInfo(selectedList);
 
 }
-
-
 
 void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
@@ -126,10 +127,10 @@ void MainToDoPanel::setUsersInfoInPanel () {
     setUsersTasksInfo();
     setUsersMyDayInfo();
 }
+
 void MainToDoPanel::setUsersListInfo () {
 
-    Users userTmp;
-    userTmp = user.find(loginUsername)->second;
+    Users userTmp = user[loginUsername];
 
     std::list<Lists> listTmp = userTmp.getLists();
 
@@ -157,27 +158,81 @@ void MainToDoPanel::addUsersListPB (Lists& list) {
 
     listButtonMap.insert(listButton, list);
 
-    // connect();
+    connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
 }
 
 
 void MainToDoPanel::setUsersTasksInfo () {
-    Users userTmp;
-    userTmp = user.find(loginUsername)->second;
+    Users userTmp = user[loginUsername];
 
 }
 void MainToDoPanel::setUsersMyDayInfo () {
-    Users userTmp;
-    userTmp = user.find(loginUsername)->second;
+    Users userTmp = user[loginUsername];
+
 }
 void MainToDoPanel::setUsersAssignedInfo () {
-    Users userTmp;
-    userTmp = user.find(loginUsername)->second;
+    Users userTmp = user[loginUsername];
+
 }
-void MainToDoPanel::setListsTaskInfo () {
-    Users userTmp;
-    userTmp = user.find(loginUsername)->second;
+
+void MainToDoPanel::setListsTaskInfo (Lists& selectedList) {
+
+    LinkList<Task> tmpTask = selectedList.getTask();
+    Node<Task> *tmp = tmpTask.getHeadNode();
+
+    while(tmp) {
+        addListsTaskItems(tmp->getData());
+        tmp = tmp->getNextNode();
+    }
+}
+void MainToDoPanel::addListsTaskItems(Task task) {
+    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
+
+    QHBoxLayout *itemLayout = new QHBoxLayout;
+    QString labelTitle = task.getTitle();
+
+    QLabel *taskLabel = new QLabel(labelTitle);
+
+
+    QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
+
+    QIcon icon (":/Image/Icons/out_line_circle.png");
+    completePB->setIcon(icon);
+
+    QSize size(20, 20);
+    completePB->setIconSize(size);
+
+    completePB->setCheckable(true);
+    completePB->setAutoExclusive(true);
+
+    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
+
+    if(task.getCompleted()) {
+        completePB->setChecked(true);
+    } else {
+        completePB->setChecked(false);
+    }
+
+    itemLayout->insertWidget(0, taskLabel);
+    itemLayout->insertWidget(0, completePB);
+
+    itemLayout->setContentsMargins(10, 1, 20, 0);
+    itemLayout->setSpacing(0);
+
+    frameLayout->insertLayout(0, itemLayout);
+
+    taskButtonMap.insert(completePB, task);
+
+    // connect ()
 }
 
 // Add functions
 
+void MainToDoPanel::addNewListToUsersList (Lists& newList) {
+
+    Users userTmp = user[loginUsername];
+
+    userTmp.addToLists(newList);
+
+    user[loginUsername] = userTmp;
+}

@@ -440,8 +440,8 @@ QPushButton:hover {
      <rect>
       <x>290</x>
       <y>0</y>
-      <width>810</width>
-      <height>670</height>
+      <width>811</width>
+      <height>671</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="mainFrameLYT_Main">
@@ -1330,22 +1330,14 @@ QComboBox QAbstractItemView {
                     <widget class="QScrollArea" name="listsScrollA">
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-	text-align : left;
+	text-align : center;
 	background : transparent; 
 	border-radius : 5 px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
 	color: rgb(255, 255, 255);
 	height : 40 px;
-	padding-left:5px;
+	padding-left:0px;
 	border-radius:5px;
-}
-QPushButton:hover {
-	background-color: rgb(51, 51, 51);
-	font: 700 9pt &quot;Playwrite DE Grund&quot;;
-}
-QPushButton:checked {
-	background-color: rgb(51, 51, 51);
-	font: 700 9pt &quot;Playwrite DE Grund&quot;;
 }
 QScrollArea {
     border:1px solid #333333;
@@ -1365,6 +1357,15 @@ QScrollBar::handle:vertical {
 
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: rgb(28, 28, 28);
+}
+QLabel {
+background-color: rgb(50, 50, 50);
+	border-radius : 5px;
+	text-align : left;
+	font: 10pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(255, 255, 255);
+	height : 40 px;
+	padding-left:5px;;
 }</string>
                      </property>
                      <property name="widgetResizable">
@@ -1376,7 +1377,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                         <x>0</x>
                         <y>0</y>
                         <width>334</width>
-                        <height>428</height>
+                        <height>429</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -1392,6 +1393,53 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_28">
+                          <item>
+                           <layout class="QHBoxLayout" name="horizontalLayout_2">
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <property name="leftMargin">
+                             <number>10</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>1</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>20</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <item>
+                             <widget class="QLabel" name="label">
+                              <property name="styleSheet">
+                               <string notr="true">	</string>
+                              </property>
+                              <property name="text">
+                               <string>Task Number one</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QPushButton" name="pushButton">
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="icon">
+                               <iconset resource="Resources.qrc">
+                                <normaloff>:/Image/Icons/out_line_circle.png</normaloff>
+                                <normalon>:/Image/Icons/fill_circle.png</normalon>:/Image/Icons/out_line_circle.png</iconset>
+                              </property>
+                              <property name="checkable">
+                               <bool>true</bool>
+                              </property>
+                              <property name="autoExclusive">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
                           <item>
                            <spacer name="listsScrollAreaSpacer">
                             <property name="orientation">
@@ -1866,7 +1914,7 @@ QLineEdit:hover {
 	border-radius : 5px;
 }</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QPlainTextEdit" name="detailesTE">
              <property name="styleSheet">
