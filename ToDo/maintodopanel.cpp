@@ -22,13 +22,11 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     connect(ui->newListPB, SIGNAL(clicked()), this, SLOT(newListPBClicked()));
 
-    connect(ui->myDayNewTaskPB, SIGNAL(clicked()), this, SLOT(myDayNewTaskPBClicked()));
     connect(ui->listsNewTaskPB, SIGNAL(clicked()), this, SLOT(listNewTaskPBClicked()));
 
+    connect(ui->addTaskPB, SIGNAL(clicked()), this, SLOT(addTaskPBClicked()));
+
     connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
-
-
-
 }
 
 MainToDoPanel::~MainToDoPanel()
@@ -90,7 +88,21 @@ void MainToDoPanel::listButtonClicked() {
 }
 
 void MainToDoPanel::taskCompletePBClicked() {
+
+    QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
+    QIcon circleFill (":/Image/Icons/fill_circle.png");
+
     QPushButton *completeTask = qobject_cast<QPushButton*>(sender());
+
+
+    if(completeTask->isChecked()) {
+        completeTask->setIcon(circleFill);
+    }
+    else {
+        completeTask->setIcon(circleOutLine);
+    }
+
+
 
     Users userTmp = user[loginUsername];
     Task taskTmp = taskButtonMap[completeTask];
@@ -110,6 +122,8 @@ void MainToDoPanel::taskCompletePBClicked() {
 
     taskButtonMap[completeTask] = taskTmp;
 }
+
+/// Fixed Menu Buttons
 
 void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
@@ -136,20 +150,23 @@ void MainToDoPanel::taskPBClicked() {
     }
 }
 
-void MainToDoPanel::listNewTaskPBClicked() {
+/// /// ///
+
+void MainToDoPanel::listNewTaskPBClicked () {
     if(ui->listsNewTaskPB->isChecked()) {
         ui->sideTasksMenu->setVisible(true);
     } else {
         ui->sideTasksMenu->setHidden(true);
     }
 }
-void MainToDoPanel::myDayNewTaskPBClicked() {
-    if(ui->myDayNewTaskPB->isChecked()) {
-        ui->sideTasksMenu->setVisible(true);
-    } else {
-        ui->sideTasksMenu->setHidden(true);
-    }
 
+void MainToDoPanel::addTaskPBClicked () {
+    if(!allErrors()) {
+        Task tmpTask;
+        addNewTaskInfo(tmpTask);
+        addNewTaskItem(tmpTask);
+
+    }
 }
 
 void MainToDoPanel::logOutPBClicked() {
@@ -224,56 +241,6 @@ void MainToDoPanel::setListsTaskInfo (Lists& selectedList) {
         tmp = tmp->getNextNode();
     }
 }
-void MainToDoPanel::addListsTaskItems(Task task) {
-    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
-
-    QHBoxLayout *itemLayout = new QHBoxLayout;
-    QString labelTitle = task.getTitle();
-
-    QLabel *taskLabel = new QLabel(labelTitle);
-
-
-    QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
-    QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
-
-    QIcon starFillIcon (":/Image/Icons/fill_star_color.png");
-    QIcon starOutLineIcon (":/Image/Icons/out_line_star.png");
-
-    if(task.getFavorite())
-        star->setIcon(starFillIcon);
-    if(!task.getFavorite())
-        star->setIcon(starOutLineIcon);
-
-    QIcon icon (":/Image/Icons/out_line_circle.png");
-    completePB->setIcon(icon);
-
-    QSize size(20, 20);
-    completePB->setIconSize(size);
-
-    completePB->setCheckable(true);
-    completePB->setAutoExclusive(true);
-
-    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
-
-    if(task.getCompleted()) {
-        completePB->setChecked(true);
-    } else {
-        completePB->setChecked(false);
-    }
-
-    itemLayout->insertWidget(0, star);
-    itemLayout->insertWidget(1, taskLabel);
-    itemLayout->insertWidget(2, completePB);
-
-    itemLayout->setContentsMargins(10, 1, 20, 0);
-    itemLayout->setSpacing(0);
-
-    frameLayout->insertLayout(0, itemLayout);
-
-    taskButtonMap.insert(completePB, task);
-
-    connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
-}
 
 void MainToDoPanel::setListsBackGround(Color c) {
 
@@ -333,8 +300,161 @@ void MainToDoPanel::setListsBackGround(Color c) {
 void MainToDoPanel::addNewListToUsersList (Lists& newList) {
 
     Users userTmp = user[loginUsername];
-
     userTmp.addToLists(newList);
-
     user[loginUsername] = userTmp;
 }
+void MainToDoPanel::addNewTaskItem (Task& task) {
+
+    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
+
+    QHBoxLayout *itemLayout = new QHBoxLayout;
+    QString labelTitle = ui->taskNameLE->text();
+
+    QLabel *taskLabel = new QLabel(labelTitle);
+
+    QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
+    QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
+
+    QIcon starFillIcon (":/Image/Icons/fill_star_color.png");
+    QIcon starOutLineIcon (":/Image/Icons/out_line_star.png");
+
+    if(task.getFavorite())
+        star->setIcon(starFillIcon);
+    if(!task.getFavorite())
+        star->setIcon(starOutLineIcon);
+
+    QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
+    QIcon circleFill (":/Image/Icons/fill_circle.png");
+    completePB->setIcon(circleOutLine);
+
+
+
+    QSize size(20, 20);
+    completePB->setIconSize(size);
+
+    completePB->setCheckable(true);
+
+    if(task.getCompleted()) {
+        completePB->setChecked(true);
+        completePB->setIcon(circleFill);
+    }
+    else {
+        completePB->setChecked(false);
+        completePB->setIcon(circleOutLine);
+    }
+
+    completePB->setChecked(true);
+
+    itemLayout->insertWidget(0, star);
+    itemLayout->insertWidget(1, taskLabel);
+    itemLayout->insertWidget(2, completePB);
+
+    itemLayout->setContentsMargins(10, 1, 20, 0);
+    itemLayout->setSpacing(0);
+
+    frameLayout->insertLayout(0, itemLayout);
+
+    taskButtonMap.insert(completePB, task);
+
+    connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+
+}
+
+/// //// //// /// // Add date After
+void MainToDoPanel::addNewTaskInfo (Task& task) {
+    task.setTitle(ui->taskNameLE->text());
+    task.setDetails(ui->detailsTE->toPlainText());
+    task.setAssignedUser(ui->assignToOtherLE->text());
+    task.setFavorite(ui->favPB->isChecked());
+    task.setCompleted(ui->completePBSideMenu->isChecked());
+
+}
+/////////////
+void MainToDoPanel::addListsTaskItems(Task task) {
+    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
+
+    QHBoxLayout *itemLayout = new QHBoxLayout;
+    QString labelTitle = task.getTitle();
+
+    QLabel *taskLabel = new QLabel(labelTitle);
+
+
+    QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
+    QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
+
+    QIcon starFillIcon (":/Image/Icons/fill_star_color.png");
+    QIcon starOutLineIcon (":/Image/Icons/out_line_star.png");
+
+    if(task.getFavorite())
+        star->setIcon(starFillIcon);
+    if(!task.getFavorite())
+        star->setIcon(starOutLineIcon);
+
+    QIcon icon (":/Image/Icons/out_line_circle.png");
+    completePB->setIcon(icon);
+
+    QSize size(20, 20);
+    completePB->setIconSize(size);
+
+    completePB->setCheckable(true);
+
+    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
+
+    if(task.getCompleted()) {
+        completePB->setChecked(true);
+    } else {
+        completePB->setChecked(false);
+    }
+
+    itemLayout->insertWidget(0, star);
+    itemLayout->insertWidget(1, taskLabel);
+    itemLayout->insertWidget(2, completePB);
+
+    itemLayout->setContentsMargins(10, 1, 20, 0);
+    itemLayout->setSpacing(0);
+
+    frameLayout->insertLayout(0, itemLayout);
+
+    taskButtonMap.insert(completePB, task);
+
+    connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+}
+
+
+// Error Functions
+bool MainToDoPanel::allErrors () {
+    if(taskTitleError())
+        return true;
+    if(assignToOtherError())
+        return true;
+
+    return false;
+}
+
+bool MainToDoPanel::taskTitleError () {
+    if(ui->taskNameLE->text() == "") {
+        QMessageBox errorMessage;
+        errorMessage.setText(tr("Please fill task title"));
+        errorMessage.setWindowTitle(tr("Fill Error"));
+        errorMessage.exec();
+        return true;
+    }
+    return false;
+}
+bool MainToDoPanel::assignToOtherError () {
+    QString assignedUsername = ui->assignToOtherLE->text();
+
+    if(assignedUsername == "")
+        return false;
+
+    if(user.find(assignedUsername)->first != "")
+        return false;
+
+    QMessageBox errorMessage;
+    errorMessage.setText(tr("This user doesen't exsit"));
+    errorMessage.setWindowTitle(tr("Find Error"));
+    errorMessage.exec();
+    return true;
+
+}
+

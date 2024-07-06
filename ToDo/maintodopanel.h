@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <mainpanel.h>
 #include <QPushButton>
+#include <QMessageBox>
 
 
 namespace Ui {
@@ -42,6 +43,15 @@ public:
 
     void setListsBackGround (Color);
 
+    void addNewTaskItem (Task&);
+    void addNewTaskInfo (Task&);
+
+    // Error Functions
+    bool allErrors ();
+
+    bool taskTitleError ();
+    bool assignToOtherError ();
+    // // //
 
 private slots:
     void newListPBClicked();
@@ -50,7 +60,6 @@ private slots:
     void taskCompletePBClicked();
 
     void listNewTaskPBClicked();
-    void myDayNewTaskPBClicked();
 
     void myDayPBClicked();
     void importantPBClicked();
@@ -58,6 +67,8 @@ private slots:
     void taskPBClicked();
 
     void logOutPBClicked();
+
+    void addTaskPBClicked();
 
 private:
     Ui::MainToDoPanel *ui;

@@ -440,7 +440,7 @@ QPushButton:hover {
      <rect>
       <x>300</x>
       <y>0</y>
-      <width>801</width>
+      <width>800</width>
       <height>670</height>
      </rect>
     </property>
@@ -592,8 +592,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>44</height>
+                        <width>318</width>
+                        <height>518</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -630,50 +630,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     </widget>
                    </item>
                   </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="myDayNewTaskPB">
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton {
-	text-align : left;
-	background : transparent; 
-	border-radius : 5 px;
-	font: 9pt &quot;Playwrite DE Grund&quot;;
-	color: rgb(255, 255, 255);
-	height : 40 px;
-	padding-left:5px;
-	border-radius:5px;
-}
-QPushButton:hover {
-	background-color: rgb(51, 51, 51);
-	font: 700 9pt &quot;Playwrite DE Grund&quot;;
-}
-QPushButton:checked {
-	background-color: rgb(51, 51, 51);
-	font: 700 9pt &quot;Playwrite DE Grund&quot;;
-}</string>
-                  </property>
-                  <property name="text">
-                   <string>   New Task </string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="Resources.qrc">
-                    <normaloff>:/Image/Icons/icons8-plus-96.png</normaloff>
-                    <normalon>:/Image/Icons/out_line_circle.png</normalon>:/Image/Icons/icons8-plus-96.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>25</width>
-                    <height>25</height>
-                   </size>
-                  </property>
-                  <property name="checkable">
-                   <bool>true</bool>
-                  </property>
-                  <property name="autoExclusive">
-                   <bool>true</bool>
-                  </property>
                  </widget>
                 </item>
                </layout>
@@ -1090,8 +1046,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>64</width>
-                           <height>44</height>
+                           <width>318</width>
+                           <height>518</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -1300,7 +1256,7 @@ QComboBox QAbstractItemView {
 	border-radius : 5px;
 }</string>
                   </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <layout class="QVBoxLayout" name="verticalLayout_7">
                    <property name="leftMargin">
                     <number>11</number>
                    </property>
@@ -1317,7 +1273,7 @@ QComboBox QAbstractItemView {
                     <widget class="QScrollArea" name="listsScrollA">
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-	text-align : left;
+	text-align : center;
 	background : transparent; 
 	border-radius : 5 px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
@@ -1362,7 +1318,7 @@ background-color: rgb(50, 50, 50);
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>318</width>
+                        <width>317</width>
                         <height>411</height>
                        </rect>
                       </property>
@@ -1527,7 +1483,7 @@ QLineEdit:hover {
               <number>6</number>
              </property>
              <item>
-              <widget class="QPushButton" name="completePB">
+              <widget class="QPushButton" name="completePBSideMenu">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1866,9 +1822,17 @@ QLineEdit:hover {
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QPlainTextEdit" name="detailesTE">
+            <widget class="QTextEdit" name="detailsTE">
+             <property name="font">
+              <font>
+               <family>Playwrite DE Grund</family>
+               <pointsize>9</pointsize>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
              <property name="styleSheet">
-              <string notr="true">QPlainTextEdit {
+              <string notr="true">QTextEdit {
 	border-radius : 5px;
 	background-color: rgb(76, 76, 76);
 	text-align : left;
@@ -1877,16 +1841,13 @@ QLineEdit:hover {
 	padding-left:10px;
 	height : 10px;
 }
-QPlainTextEdit:hover {
+QTextEdit:hover {
 	background-color: rgb(80, 80, 80);
 	font: 700 10pt &quot;Playwrite DE Grund&quot;;
 }</string>
              </property>
-             <property name="plainText">
-              <string/>
-             </property>
              <property name="placeholderText">
-              <string>Add Note</string>
+              <string>Add note</string>
              </property>
             </widget>
            </item>
@@ -1909,7 +1870,7 @@ QPlainTextEdit:hover {
             <number>5</number>
            </property>
            <item>
-            <widget class="QPushButton" name="addTaskFrame">
+            <widget class="QPushButton" name="addTaskPB">
              <property name="styleSheet">
               <string notr="true">QPushButton {
 	text-align : left;
