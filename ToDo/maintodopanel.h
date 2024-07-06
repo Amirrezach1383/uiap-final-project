@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <mainpanel.h>
+#include <QPushButton>
 
 
 namespace Ui {
@@ -17,13 +18,29 @@ public:
     std::map<QString, Users> user;
     QString loginUsername;
 
+    QHash <QPushButton*, Lists> listButtonMap;
+    QHash <QPushButton*, Task> taskButtonMap;
+
     explicit MainToDoPanel(QString, std::map<QString, Users>, QWidget *parent = nullptr);
     ~MainToDoPanel();
 
     void unCheckedPB ();
 
+    void setUsersInfoInPanel ();
+
+    void setUsersListInfo ();
+    void addUsersListPB (Lists&);
+
+    void setUsersTasksInfo ();
+    void setUsersMyDayInfo ();
+    void setUsersAssignedInfo ();
+    void setListsTaskInfo ();
+
+
 private slots:
     void newListPBClicked();
+    void listButtonClicked();
+
     void listNewTaskPBClicked();
     void myDayNewTaskPBClicked();
 

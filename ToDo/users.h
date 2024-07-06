@@ -19,6 +19,7 @@ public:
     QString getFirstName ();
     QString getLastName ();
     Lists getLists(int);
+    std::list<Lists> getLists();
 
 private:
     QString username;

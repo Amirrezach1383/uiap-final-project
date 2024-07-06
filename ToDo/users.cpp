@@ -39,3 +39,7 @@ Lists Users::getLists(int listID) {
     }
     return Lists();
 }
+
+std::list<Lists> Users::getLists() {
+    return lists;
+}

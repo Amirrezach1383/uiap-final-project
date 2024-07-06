@@ -27,7 +27,6 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
 
-
 }
 
 MainToDoPanel::~MainToDoPanel()
@@ -38,10 +37,13 @@ MainToDoPanel::~MainToDoPanel()
 // Private Slots
 
 void MainToDoPanel::newListPBClicked() {
+    Lists newList;
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsFrame->layout());
 
     QString buttonText = tr("List %1").arg(frameLayout->count());
     QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
+
+    newList.setTitle(buttonText);
 
     QIcon icon (":/Image/Icons/list_icon.png");
     listButton->setIcon(icon);
@@ -54,9 +56,16 @@ void MainToDoPanel::newListPBClicked() {
 
     frameLayout->insertWidget(frameLayout->count() - 1, listButton);
 
-    // connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
+    listButtonMap.insert(listButton, newList);
+
+    connect(listButton, SIGNAL(clicked()), this, SLOT(listPb_clicked()));
 
 }
+void MainToDoPanel::listButtonClicked() {
+
+}
+
+
 
 void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
@@ -105,3 +114,70 @@ void MainToDoPanel::logOutPBClicked() {
     this->close();
 }
 // // // //
+
+
+// Set Info Functions
+void MainToDoPanel::setUsersInfoInPanel () {
+
+    ui->userInfoLB->setText(loginUsername);
+
+    setUsersListInfo();
+    setUsersAssignedInfo();
+    setUsersTasksInfo();
+    setUsersMyDayInfo();
+}
+void MainToDoPanel::setUsersListInfo () {
+
+    Users userTmp;
+    userTmp = user.find(loginUsername)->second;
+
+    std::list<Lists> listTmp = userTmp.getLists();
+
+    for(auto it = listTmp.begin(); it != userTmp.getLists().end(); it++) {
+        addUsersListPB(*it);
+    }
+
+}
+void MainToDoPanel::addUsersListPB (Lists& list) {
+    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsFrame->layout());
+
+    QString buttonText = list.getTile();
+    QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
+
+    QIcon icon (":/Image/Icons/list_icon.png");
+    listButton->setIcon(icon);
+
+    QSize size (20, 20);
+    listButton->setIconSize(size);
+
+    listButton->setCheckable(true);
+    listButton->setAutoExclusive(true);
+
+    frameLayout->insertWidget(frameLayout->count() - 1, listButton);
+
+    listButtonMap.insert(listButton, list);
+
+    // connect();
+}
+
+
+void MainToDoPanel::setUsersTasksInfo () {
+    Users userTmp;
+    userTmp = user.find(loginUsername)->second;
+
+}
+void MainToDoPanel::setUsersMyDayInfo () {
+    Users userTmp;
+    userTmp = user.find(loginUsername)->second;
+}
+void MainToDoPanel::setUsersAssignedInfo () {
+    Users userTmp;
+    userTmp = user.find(loginUsername)->second;
+}
+void MainToDoPanel::setListsTaskInfo () {
+    Users userTmp;
+    userTmp = user.find(loginUsername)->second;
+}
+
+// Add functions
+
