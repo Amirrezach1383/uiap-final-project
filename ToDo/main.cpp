@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
         return 0;
 
     // MainPanel w(user);
-    MainToDoPanel w(user);
+    MainToDoPanel w(*new QString, user);
     w.show();
 
     return a.exec();

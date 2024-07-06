@@ -1,9 +1,10 @@
 #include "maintodopanel.h"
 #include "ui_maintodopanel.h"
 
-MainToDoPanel::MainToDoPanel(std::map<QString, Users> users,QWidget *parent)
+MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QWidget *parent)
     : QMainWindow(parent)
     , user(users)
+    , loginUsername(username)
     , ui(new Ui::MainToDoPanel) {
     ui->setupUi(this);
 

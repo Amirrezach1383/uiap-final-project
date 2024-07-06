@@ -24,7 +24,8 @@ void LoginPanel::backPBClicked() {
 }
 void LoginPanel::loginPBClicked() {
     if(allError() == false) {
-        MainToDoPanel *panel = new MainToDoPanel(user);
+        openAndSetMessageBox();
+        MainToDoPanel *panel = new MainToDoPanel(ui->usernameLE->text(), user);
         panel->show();
         this->close();
     }
@@ -38,7 +39,6 @@ void LoginPanel::openAndSetMessageBox () {
     msgBox.setIconPixmap(pixmap);
 
     msgBox.exec();
-
 }
 
 // Error Functions

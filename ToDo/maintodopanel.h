@@ -15,8 +15,9 @@ class MainToDoPanel : public QMainWindow
 
 public:
     std::map<QString, Users> user;
+    QString loginUsername;
 
-    explicit MainToDoPanel(std::map<QString, Users>, QWidget *parent = nullptr);
+    explicit MainToDoPanel(QString, std::map<QString, Users>, QWidget *parent = nullptr);
     ~MainToDoPanel();
 
     void unCheckedPB ();

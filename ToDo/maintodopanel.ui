@@ -438,9 +438,9 @@ QPushButton:hover {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>284</x>
+      <x>290</x>
       <y>0</y>
-      <width>815</width>
+      <width>810</width>
       <height>670</height>
      </rect>
     </property>
@@ -1185,7 +1185,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <number>2</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="pushButton">
+                 <widget class="QPushButton" name="PDFPB">
                   <property name="cursor">
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
@@ -1209,7 +1209,7 @@ border: none;</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="colorComboBox">
                   <property name="styleSheet">
                    <string notr="true">QComboBox::down-arrow {
 	border-image: url(:/Image/Icons/fill_more100.png);
@@ -1682,10 +1682,12 @@ QLineEdit:hover {
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QCalendarWidget" name="calendarWidget">
-                 <property name="styleSheet">
-                  <string notr="true">#calendarWidget QWidget {
+              </layout>
+             </item>
+             <item>
+              <widget class="QCalendarWidget" name="calendarWidget">
+               <property name="styleSheet">
+                <string notr="true">#calendarWidget QWidget {
 	alternate-background-color:   #323232;
  	font: 7pt &quot;Playwrite DE Grund&quot;;
 	color: white;
@@ -1783,13 +1785,8 @@ QLineEdit:hover {
 	border-radius : 7px;
 }
 </string>
-                 </property>
-                 <property name="selectionMode">
-                  <enum>QCalendarWidget::NoSelection</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
