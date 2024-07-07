@@ -163,11 +163,12 @@ void MainToDoPanel::assignedPBClicked() {
     }
 }
 void MainToDoPanel::taskPBClicked() {
-    ui->titleLB->setText("Task");
+    ui->titleLB->setText("Tasks");
     if(ui->tasksPB->isChecked()) {
         unCheckedListButton ();
         ui->mainStack->setCurrentIndex(3);
     }
+    setUsersTasksInfo();
 }
 
 /// /// ///
@@ -323,6 +324,7 @@ void MainToDoPanel::addUsersListPB (Lists& list) {
 }
 
 void MainToDoPanel::setUsersTasksInfo () {
+    unCheckedListButton ();
     Users userTmp = user[loginUsername];
 
     cleanStack();
@@ -335,6 +337,7 @@ void MainToDoPanel::setUsersTasksInfo () {
         Node<Task> *tmp = taskList.getHeadNode();
         while (tmp) {
             addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->taskScrollAFrame->layout()), tmp->getData());
+            tmp = tmp->getNextNode();
         }
     }
 }

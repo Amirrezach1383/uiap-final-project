@@ -510,7 +510,7 @@ border-radius : 5px;
 </string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="myDay">
              <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1000,7 +1000,7 @@ border-radius : 5px;
                        <widget class="QScrollArea" name="taskScrollA">
                         <property name="styleSheet">
                          <string notr="true">QPushButton {
-	text-align : left;
+	text-align : center;
 	background : transparent; 
 	border-radius : 5 px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
@@ -1045,8 +1045,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>64</width>
-                           <height>44</height>
+                           <width>317</width>
+                           <height>518</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_17">
