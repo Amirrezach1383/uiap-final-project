@@ -64,6 +64,8 @@ public:
 
     void addWidgetToScrollArea (QVBoxLayout*, Task);
 
+    void unCheckedListButton ();
+
 private slots:
     void newListPBClicked();
     void listButtonClicked();

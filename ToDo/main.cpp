@@ -87,7 +87,7 @@ void setTask (std::vector<Task>& task) {
 
         tmpTask.setTaskID(taskID);
         tmpTask.setListID(listID);
-        tmpTask.setReminder(QDate::fromString(reminder));
+        tmpTask.setReminder(QDate::fromString(reminder, Qt::ISODate));
         tmpTask.setAssignedUser(assigned);
         tmpTask.setCompleted(completed);
         tmpTask.setFavorite(favorite);

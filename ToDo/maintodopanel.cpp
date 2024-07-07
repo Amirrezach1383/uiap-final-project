@@ -47,6 +47,14 @@ void MainToDoPanel::unCheckedPB() {
     ui->importantPB->setChecked(false);
 }
 
+void MainToDoPanel::unCheckedListButton() {
+    ui->sideTasksMenu->setHidden(true);
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it) {
+        if(it.key()->isChecked()) {
+            it.key()->setChecked(false);
+        }
+    }
+}
 // Private Slots
 
 void MainToDoPanel::newListPBClicked() {
@@ -71,8 +79,8 @@ void MainToDoPanel::newListPBClicked() {
 
     frameLayout->insertWidget(frameLayout->count() - 1, listButton);
 
-    listButtonMap.insert(listButton, newList);
     addNewListToUsersList(newList);
+    listButtonMap.insert(listButton, newList);
 
     connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
 }
@@ -134,6 +142,7 @@ void MainToDoPanel::taskCompletePBClicked() {
 void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
     if(ui->myDayPB->isChecked()) {
+        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(0);
     }
 
@@ -142,18 +151,21 @@ void MainToDoPanel::myDayPBClicked() {
 void MainToDoPanel::importantPBClicked() {
     ui->titleLB->setText("Important");
     if(ui->importantPB->isChecked()) {
+        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(1);
     }
 }
 void MainToDoPanel::assignedPBClicked() {
     ui->titleLB->setText("Assigned To Me");
     if(ui->assignedToMePB->isChecked()) {
+        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(2);
     }
 }
 void MainToDoPanel::taskPBClicked() {
     ui->titleLB->setText("Task");
     if(ui->tasksPB->isChecked()) {
+        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(3);
     }
 }
@@ -313,11 +325,24 @@ void MainToDoPanel::addUsersListPB (Lists& list) {
 void MainToDoPanel::setUsersTasksInfo () {
     Users userTmp = user[loginUsername];
 
+    cleanStack();
+
+    std::list<Lists> tmpList = userTmp.getLists();
+    LinkList<Task> taskList;
+
+    for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
+        taskList = it->getTask();
+        Node<Task> *tmp = taskList.getHeadNode();
+        while (tmp) {
+            addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->taskScrollAFrame->layout()), tmp->getData());
+        }
+    }
 }
 void MainToDoPanel::setUsersMyDayInfo () {
+    unCheckedListButton();
     Users userTmp = user[loginUsername];
     QDate Today;
-    int day = Today.day();
+    int day = Today.currentDate().day();
 
     cleanStack();
 
@@ -330,6 +355,7 @@ void MainToDoPanel::setUsersMyDayInfo () {
         while (tmp) {
             if(tmp->getData().getReminder().day() == day) {
                 addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->myDayScrollAFrame->layout()), tmp->getData());
+                tmp = tmp->getNextNode();
             }
 
         }
@@ -443,6 +469,7 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
         star->setIcon(starOutLineIcon);
 
     QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
+    QIcon circleFill (":/Image/Icons/fill_circle.png");
     completePB->setIcon(circleOutLine);
 
     QSize size(20, 20);
@@ -450,7 +477,12 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
 
     completePB->setCheckable(true);
 
-    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
+    if(task.getCompleted()) {
+        completePB->setIcon(circleFill);
+    }
+    else {
+        completePB->setIcon(circleOutLine);
+    }
 
     completePB->setChecked(true);
 
@@ -468,7 +500,6 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
     taskButtonMap.insert(completePB, task);
     layoutMap.insert(widget, itemLayout);
     detailsMap.insert(taskLabel, task.getDetails());
-
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
     connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
@@ -531,20 +562,21 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     if(!task.getFavorite())
         star->setIcon(starOutLineIcon);
 
-    QIcon icon (":/Image/Icons/out_line_circle.png");
-    completePB->setIcon(icon);
+    QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
+    QIcon circleFill (":/Image/Icons/fill_circle.png");
+    completePB->setIcon(circleOutLine);
 
     QSize size(20, 20);
     completePB->setIconSize(size);
 
     completePB->setCheckable(true);
 
-    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
-
     if(task.getCompleted()) {
         completePB->setChecked(true);
+        completePB->setIcon(circleFill);
     } else {
         completePB->setChecked(false);
+        completePB->setIcon(circleOutLine);
     }
 
     itemLayout->insertWidget(0, star);
@@ -593,20 +625,22 @@ void MainToDoPanel::addWidgetToScrollArea (QVBoxLayout* frame, Task task) {
     if(!task.getFavorite())
         star->setIcon(starOutLineIcon);
 
-    QIcon icon (":/Image/Icons/out_line_circle.png");
-    completePB->setIcon(icon);
+    QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
+    QIcon circleFill (":/Image/Icons/fill_circle.png");
+
+    completePB->setIcon(circleOutLine);
 
     QSize size(20, 20);
     completePB->setIconSize(size);
 
     completePB->setCheckable(true);
 
-    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
-
     if(task.getCompleted()) {
         completePB->setChecked(true);
+        completePB->setIcon(circleFill);
     } else {
         completePB->setChecked(false);
+        completePB->setIcon(circleOutLine);
     }
 
     itemLayout->insertWidget(0, star);

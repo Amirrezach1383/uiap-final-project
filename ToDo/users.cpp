@@ -15,12 +15,12 @@ void Users::setFirstName (QString d) {
 void Users::setLastName (QString d) {
     lastName = d;
 }
-void Users::addToLists (Lists d) {
+void Users::addToLists (Lists& d) {
     d.setListID(lists.size() + 1);
     d.setUsername(this->username);
     lists.push_back(d);
 }
-void Users::setLists(int listID, Lists list) {
+void Users::setLists(int listID, Lists &list) {
 
     for(auto it = lists.begin(); it != lists.end(); it++) {
         if(it->getListID() == listID) {

@@ -12,8 +12,8 @@ public:
     void setPassword (QString);
     void setFirstName (QString);
     void setLastName (QString);
-    void addToLists (Lists);
-    void setLists (int, Lists);
+    void addToLists (Lists&);
+    void setLists (int, Lists&);
 
     QString getUsername ();
     QString getPassword ();

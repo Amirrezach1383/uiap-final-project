@@ -26,6 +26,7 @@ void Lists::setTask(int taskID, Task task) {
         if(tmp->getData().getTaskID() == taskID) {
             tmp->setData(task);
         }
+        tmp = tmp->getNextNode();
     }
 }
 
