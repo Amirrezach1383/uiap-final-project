@@ -7,7 +7,6 @@
 #include <QPushButton>
 #include <QMessageBox>
 
-
 namespace Ui {
 class MainToDoPanel;
 }
@@ -63,6 +62,8 @@ public:
 
     void cleanSideTaskMenu ();
 
+    void addWidgetToScrollArea (QVBoxLayout*, Task&);
+
 private slots:
     void newListPBClicked();
     void listButtonClicked();
@@ -83,6 +84,8 @@ private slots:
     void showTaskDetails();
 
     void comboBoxChanged();
+
+    void getPDFOutPut ();
 
 private:
     Ui::MainToDoPanel *ui;

@@ -29,6 +29,9 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
     connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
 
     connect(ui->colorComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxChanged()));
+
+    // // // // // // // // //
+    connect(ui->PDFPB, SIGNAL(clicked()), this, SLOT(getPDFOutPut()));
 }
 
 MainToDoPanel::~MainToDoPanel()
@@ -52,6 +55,8 @@ void MainToDoPanel::newListPBClicked() {
 
     QString buttonText = tr("List %1").arg(frameLayout->count());
     QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
+
+    ui->listsBKG->setStyleSheet("");
 
     newList.setTitle(buttonText);
 
@@ -86,7 +91,6 @@ void MainToDoPanel::listButtonClicked() {
     Color c = selectedList.getColor();
     setListsBackGround(c);
 
-    ui->listsBKG->setStyleSheet("");
     setListsTaskInfo(selectedList);
 
 }
@@ -259,6 +263,10 @@ void MainToDoPanel::updateListBackground(Color c) {
     user[loginUsername] = tmpUser;
 }
 
+void MainToDoPanel::getPDFOutPut () {
+
+}
+
 // Set Info Functions
 void MainToDoPanel::setUsersInfoInPanel () {
 
@@ -415,7 +423,7 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
         star->setIcon(starOutLineIcon);
 
     QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
-    QIcon circleFill (":/Image/Icons/fill_circle.png");
+    // QIcon circleFill (":/Image/Icons/fill_circle.png");
     completePB->setIcon(circleOutLine);
 
     QSize size(20, 20);
@@ -423,14 +431,15 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
 
     completePB->setCheckable(true);
 
-    if(task.getCompleted()) {
-        completePB->setChecked(true);
-        completePB->setIcon(circleFill);
-    }
-    else {
-        completePB->setChecked(false);
-        completePB->setIcon(circleOutLine);
-    }
+    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
+    // if(task.getCompleted()) {
+    //     completePB->setChecked(true);
+    //     completePB->setIcon(circleFill);
+    // }
+    // else {
+    //     completePB->setChecked(false);
+    //     completePB->setIcon(circleOutLine);
+    // }
 
     completePB->setChecked(true);
 
@@ -500,7 +509,6 @@ void MainToDoPanel::addListsTaskItems(Task task) {
 
     QPushButton *taskLabel = new QPushButton(buttonTitle);
 
-
     QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
     QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
 
@@ -547,6 +555,68 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
 }
 
+void MainToDoPanel::addWidgetToScrollArea (QVBoxLayout* frame, Task& task) {
+    QHBoxLayout *itemLayout = new QHBoxLayout;
+    QString buttonTitle = task.getTitle();
+
+    QWidget *widget = new QWidget;
+    widget->setStyleSheet(
+        "QWidget {"
+        "background-color: rgb(50, 50, 50);"
+        "border-radius : 5px;"
+        "}"
+        );
+
+    QPushButton *taskLabel = new QPushButton(buttonTitle);
+
+
+    QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
+    QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
+
+
+    QIcon starFillIcon (":/Image/Icons/fill_star_color.png");
+    QIcon starOutLineIcon (":/Image/Icons/out_line_star.png");
+
+    if(task.getFavorite())
+        star->setIcon(starFillIcon);
+    if(!task.getFavorite())
+        star->setIcon(starOutLineIcon);
+
+    QIcon icon (":/Image/Icons/out_line_circle.png");
+    completePB->setIcon(icon);
+
+    QSize size(20, 20);
+    completePB->setIconSize(size);
+
+    completePB->setCheckable(true);
+
+    completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
+
+    if(task.getCompleted()) {
+        completePB->setChecked(true);
+    } else {
+        completePB->setChecked(false);
+    }
+
+    itemLayout->insertWidget(0, star);
+    itemLayout->insertWidget(1, taskLabel);
+    itemLayout->insertWidget(2, completePB);
+
+    itemLayout->setContentsMargins(10, 1, 20, 0);
+    itemLayout->setSpacing(0);
+
+    widget->setLayout(itemLayout);
+
+    frame->insertWidget(0, widget);
+
+    taskButtonMap.insert(completePB, task);
+    layoutMap.insert(widget, itemLayout);
+    detailsMap.insert(taskLabel, task.getDetails());
+
+    connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+    connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
+
+}
 
 // Error Functions
 bool MainToDoPanel::allErrors () {
