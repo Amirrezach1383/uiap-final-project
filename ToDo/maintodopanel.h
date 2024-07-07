@@ -58,6 +58,8 @@ public:
 
     void cleanListsStack ();
 
+    void cleanSideTaskMenu ();
+
 private slots:
     void newListPBClicked();
     void listButtonClicked();

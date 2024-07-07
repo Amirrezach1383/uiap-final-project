@@ -167,7 +167,9 @@ void MainToDoPanel::addTaskPBClicked () {
     if(!allErrors()) {
         Task tmpTask;
         addNewTaskInfo(tmpTask);
+        addNewTaskToUserLists(tmpTask);
         addNewTaskItem(tmpTask);
+        cleanSideTaskMenu();
     }
 }
 
@@ -406,6 +408,15 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     QHBoxLayout *itemLayout = new QHBoxLayout;
     QString labelTitle = task.getTitle();
 
+    QWidget *widget = new QWidget;
+
+    widget->setStyleSheet(
+        "QWidget {"
+        "background-color: rgb(50, 50, 50);"
+        "border-radius : 5px;"
+        "}"
+        );
+
     QLabel *taskLabel = new QLabel(labelTitle);
 
 
@@ -443,9 +454,12 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     itemLayout->setContentsMargins(10, 1, 20, 0);
     itemLayout->setSpacing(0);
 
-    frameLayout->insertLayout(0, itemLayout);
+    widget->setLayout(itemLayout);
+
+    frameLayout->insertWidget(0, widget);
 
     taskButtonMap.insert(completePB, task);
+    layoutMap.insert(widget, itemLayout);
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
 }
@@ -504,4 +518,9 @@ void MainToDoPanel::cleanListsStack () {
     layoutMap.clear();
 }
 
+void MainToDoPanel::cleanSideTaskMenu () {
+    ui->taskNameLE->clear();
+    ui->detailsTE->clear();
+    ui->assignToOtherLE->clear();
+}
 
