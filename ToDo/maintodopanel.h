@@ -50,6 +50,8 @@ public:
     void addNewTaskInfo (Task&);
     void addNewTaskToUserLists (Task&);
 
+    void updateListBackground (Color c);
+
     // Error Functions
     bool allErrors ();
 
@@ -79,6 +81,8 @@ private slots:
     void addTaskPBClicked();
 
     void showTaskDetails();
+
+    void comboBoxChanged();
 
 private:
     Ui::MainToDoPanel *ui;

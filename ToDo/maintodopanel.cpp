@@ -1,5 +1,4 @@
 #include "maintodopanel.h"
-#include "qregularexpression.h"
 #include "ui_maintodopanel.h"
 
 MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QWidget *parent)
@@ -28,6 +27,8 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
     connect(ui->addTaskPB, SIGNAL(clicked()), this, SLOT(addTaskPBClicked()));
 
     connect(ui->logOutPB, SIGNAL(clicked()), this, SLOT(logOutPBClicked()));
+
+    connect(ui->colorComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxChanged()));
 }
 
 MainToDoPanel::~MainToDoPanel()
@@ -185,6 +186,48 @@ void MainToDoPanel::showTaskDetails() {
 
 }
 
+void MainToDoPanel::comboBoxChanged() {
+    Color c;
+
+    if(ui->colorComboBox->currentText() == "Blue") {
+        c = Blue;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+    if(ui->colorComboBox->currentText() == "Red") {
+        c = Red;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+    if(ui->colorComboBox->currentText() == "Black") {
+        c = Black;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+    if(ui->colorComboBox->currentText() == "Green") {
+        c = Green;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+    if(ui->colorComboBox->currentText() == "Default") {
+        c = Default;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+    if(ui->colorComboBox->currentText() == "Yellow") {
+        c = Yellow;
+        setListsBackGround(c);
+        updateListBackground(c);
+        return;
+    }
+
+}
+
 void MainToDoPanel::logOutPBClicked() {
     MainPanel *panel = new MainPanel(user);
     panel->show();
@@ -192,6 +235,29 @@ void MainToDoPanel::logOutPBClicked() {
 }
 // // // //
 
+void MainToDoPanel::updateListBackground(Color c) {
+    Lists tmpList;
+
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it) {
+        if(it.key()->isChecked()) {
+            tmpList = it.value();
+            break;
+        }
+    }
+
+    tmpList.setColor(c);
+
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it) {
+        if(it.key()->isChecked()) {
+            it.value() = tmpList;
+            break;
+        }
+    }
+
+    Users tmpUser = user[loginUsername];
+    tmpUser.setLists(tmpList.getListID(), tmpList);
+    user[loginUsername] = tmpUser;
+}
 
 // Set Info Functions
 void MainToDoPanel::setUsersInfoInPanel () {
@@ -540,4 +606,5 @@ void MainToDoPanel::cleanSideTaskMenu () {
     ui->detailsTE->clear();
     ui->assignToOtherLE->clear();
 }
+
 
