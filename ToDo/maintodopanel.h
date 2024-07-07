@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include <QtWidgets>
 #include <QPrinter>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 namespace Ui {
 class MainToDoPanel;
@@ -70,6 +72,12 @@ public:
     void unCheckedListButton ();
 
     void checkReminder ();
+
+    void addListToDB (Lists&);
+    void addTaskToDB (Task&);
+
+    bool openDB(QSqlDatabase&);
+    void closeDB(QSqlDatabase&);
 
 private slots:
     void newListPBClicked();

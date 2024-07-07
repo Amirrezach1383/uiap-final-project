@@ -14,6 +14,8 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     ui->sideTasksMenu->setHidden(true);
 
+    setUsersTasksInfo();
+
     // Connects
     connect(ui->myDayPB, SIGNAL(clicked()), this, SLOT(myDayPBClicked()));
     connect(ui->importantPB, SIGNAL(clicked()), this, SLOT(importantPBClicked()));
@@ -320,8 +322,6 @@ void MainToDoPanel::getPDFOutPut () {
 void MainToDoPanel::setUsersInfoInPanel () {
 
     ui->userInfoLB->setText(loginUsername);
-
-
 }
 
 void MainToDoPanel::setUsersListInfo () {
@@ -822,4 +822,54 @@ void MainToDoPanel::checkReminder () {
     QMessageBox::information(nullptr, "Reminder", string);
 }
 
+void MainToDoPanel::addTaskToDB (Task& task) {
+    QSqlDatabase toDoDB;
+    if(!openDB(toDoDB))
+        return;
 
+    QSqlQuery query;
+    query.prepare("INSERT INTO Task (Title, Details, Favorit, Completed, AssignedUser, Reminder, TaskID, ListID) VALUES (:title, :details, :favorit, :completed, :assignedUser, :reminder, :taskid, :listid)");
+    query.bindValue(":title", task.getTitle());
+    query.bindValue(":details", task.getDetails());
+    query.bindValue(":favorite", task.getFavorite());
+    query.bindValue(":completed", task.getCompleted());
+    query.bindValue(":assignedUser", task.getAssignedUser());
+    query.bindValue(":reminder", task.getReminder());
+    query.bindValue(":taskid", task.getTaskID());
+    query.bindValue(":listid", task.getListID());
+
+    query.exec();
+
+    closeDB(toDoDB);
+}
+void MainToDoPanel::addListToDB (Lists& list) {
+
+    QSqlDatabase toDoDB;
+    if(!openDB(toDoDB))
+        return;
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO Lists (Username, ListID, Title, Color) VALUES (:username, :listId, :title, :color)");
+
+    query.bindValue(":username", loginUsername);
+    query.bindValue(":listId", list.getListID());
+    query.bindValue(":title", list.getTile());
+    query.bindValue(":color", QString::number(static_cast<int>(list.getColor())));
+
+    query.exec();
+    closeDB(toDoDB);
+
+}
+
+bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
+    toDoDB = QSqlDatabase::addDatabase("QSQLITE");
+    toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
+
+    if(toDoDB.open())
+        return true;
+    return false;
+}
+void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
+    toDoDB.close();
+    toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
+}
