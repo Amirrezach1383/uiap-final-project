@@ -6,6 +6,8 @@
 #include <mainpanel.h>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QtWidgets>
+#include <QPrinter>
 
 namespace Ui {
 class MainToDoPanel;
@@ -37,6 +39,7 @@ public:
     void setUsersTasksInfo ();
     void setUsersMyDayInfo ();
     void setUsersAssignedInfo ();
+    void setUsersImportantInfo ();
 
     void setListsTaskInfo (Lists&);
     void addListsTaskItems(Task);
@@ -66,6 +69,8 @@ public:
 
     void unCheckedListButton ();
 
+    void checkReminder ();
+
 private slots:
     void newListPBClicked();
     void listButtonClicked();
@@ -88,7 +93,6 @@ private slots:
     void comboBoxChanged();
 
     void getPDFOutPut ();
-
 private:
     Ui::MainToDoPanel *ui;
 };

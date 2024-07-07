@@ -142,7 +142,6 @@ void MainToDoPanel::taskCompletePBClicked() {
 void MainToDoPanel::myDayPBClicked() {
     ui->titleLB->setText("My Day");
     if(ui->myDayPB->isChecked()) {
-        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(0);
     }
 
@@ -151,16 +150,16 @@ void MainToDoPanel::myDayPBClicked() {
 void MainToDoPanel::importantPBClicked() {
     ui->titleLB->setText("Important");
     if(ui->importantPB->isChecked()) {
-        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(1);
     }
+    setUsersImportantInfo();
 }
 void MainToDoPanel::assignedPBClicked() {
     ui->titleLB->setText("Assigned To Me");
     if(ui->assignedToMePB->isChecked()) {
-        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(2);
     }
+    setUsersAssignedInfo();
 }
 void MainToDoPanel::taskPBClicked() {
     ui->titleLB->setText("Tasks");
@@ -279,7 +278,42 @@ void MainToDoPanel::updateListBackground(Color c) {
 }
 
 void MainToDoPanel::getPDFOutPut () {
+    Lists list;
+    QTextDocument doc;
+    LinkList<Task> tmpTask;
 
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it) {
+        if(it.key()->isChecked()) {
+            list = it.value();
+        }
+    }
+
+    QString fileName = QFileDialog::getSaveFileName((QWidget*)0, "Export PDF", QString(QString::number(list.getListID())), "*.pdf");
+    if(QFileInfo(fileName).suffix().isEmpty()) { fileName.append("*.pdf");}
+
+    QPrinter printer(QPrinter::PrinterResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(fileName);
+
+    doc.setHtml("<h1>"+list.getTile()+"</h1>\n");
+
+    tmpTask = list.getTask();
+    Node<Task> *tmp = tmpTask.getHeadNode();
+
+    while(tmp) {
+        Task task = tmp->getData();
+        QString string;
+
+        if(task.getCompleted())
+            string = "Completed";
+        else
+            string = "Not Completed";
+
+        doc.setHtml("<p> Task : "+QString::number(task.getTaskID())+" Title : "+task.getTitle()+" Details : "+ task.getDetails() +" Assigned User : "+ task.getAssignedUser() +" Task State : "+ string +"</p>\n");
+        tmp = tmp->getNextNode();
+    }
+
+    doc.print(&printer);
 }
 
 // Set Info Functions
@@ -366,7 +400,52 @@ void MainToDoPanel::setUsersMyDayInfo () {
 
 }
 void MainToDoPanel::setUsersAssignedInfo () {
+    unCheckedListButton();
     Users userTmp = user[loginUsername];
+
+    cleanStack();
+
+    std::list<Lists> tmpList;
+    LinkList<Task> taskList;
+
+    for(auto it = user.begin(); it != user.end(); ++it){
+        if(it->second.getUsername() != loginUsername) {
+            tmpList = it->second.getLists();
+            for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
+                taskList = it->getTask();
+                Node<Task> *tmp = taskList.getHeadNode();
+                while(tmp) {
+                    if(tmp->getData().getAssignedUser() == loginUsername) {
+                        addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->assignedToMeScrollAFrame->layout()), tmp->getData());
+                    }
+                    tmp = tmp->getNextNode();
+                }
+            }
+        }
+
+    }
+
+}
+void MainToDoPanel::setUsersImportantInfo () {
+    unCheckedListButton();
+    Users userTmp = user[loginUsername];
+
+    cleanStack();
+
+    std::list<Lists> tmpList = userTmp.getLists();
+    LinkList<Task> taskList;
+
+    for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
+        taskList = it->getTask();
+        Node<Task> *tmp = taskList.getHeadNode();
+        while (tmp) {
+            if(tmp->getData().getFavorite()) {
+                addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->importantScrollAFrame->layout()), tmp->getData());
+                tmp = tmp->getNextNode();
+            }
+
+        }
+    }
 
 }
 
@@ -723,6 +802,24 @@ void MainToDoPanel::cleanSideTaskMenu () {
     ui->taskNameLE->clear();
     ui->detailsTE->clear();
     ui->assignToOtherLE->clear();
+}
+
+void MainToDoPanel::checkReminder () {
+    Users userTmp = user[loginUsername];
+    std::list<Lists> tmpList = userTmp.getLists();
+    QString string;
+
+    for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
+        LinkList<Task> listTmp = it->getTask();
+        Node<Task> * tmp = listTmp.getHeadNode();
+        while(tmp) {
+            if(tmp->getData().getReminder() == QDate::currentDate()) {
+                string += "\n" + tmp->getData().getTitle();
+            }
+            tmp = tmp->getNextNode();
+        }
+    }
+    QMessageBox::information(nullptr, "Reminder", string);
 }
 
 

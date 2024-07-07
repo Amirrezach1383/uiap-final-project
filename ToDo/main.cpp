@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QtSql>
 
+
 void readDataFromDB (QSqlDatabase&, std::map<QString,Users>&, std::vector<Task>&, std::vector<Lists>&);
 void setTask (std::vector<Task>&);
 void setList (std::vector<Lists>&, std::vector<Task>&);

@@ -670,13 +670,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <widget class="QScrollArea" name="importantScrollA">
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-	text-align : left;
+	text-align : center;
 	background : transparent; 
 	border-radius : 5 px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
 	color: rgb(255, 255, 255);
 	height : 40 px;
-	padding-left:5px;
 	border-radius:5px;
 }
 QPushButton:hover {
@@ -715,8 +714,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>44</height>
+                        <width>317</width>
+                        <height>518</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1006,7 +1005,6 @@ border-radius : 5px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
 	color: rgb(255, 255, 255);
 	height : 40 px;
-	padding-left:5px;
 	border-radius:5px;
 }
 QPushButton:hover {
