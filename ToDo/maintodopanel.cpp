@@ -165,7 +165,6 @@ void MainToDoPanel::addTaskPBClicked () {
         Task tmpTask;
         addNewTaskInfo(tmpTask);
         addNewTaskItem(tmpTask);
-
     }
 }
 
@@ -363,9 +362,9 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
     frameLayout->insertWidget(0, widget);
 
     taskButtonMap.insert(completePB, task);
+    layoutMap.insert(widget, itemLayout);
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
-
 }
 
 /// //// //// /// // Add date After
@@ -465,4 +464,21 @@ bool MainToDoPanel::assignToOtherError () {
     return true;
 
 }
+
+void MainToDoPanel::cleanListsStack () {
+
+    for(auto it = layoutMap.begin(); it != layoutMap.end(); it++) {
+
+        while(it.value()->count() != 0) {
+            QLayoutItem* item = it.value()->takeAt(0);
+            delete item->widget();
+            delete item;
+        }
+        delete it.value();
+        delete it.key();
+    }
+
+    layoutMap.clear();
+}
+
 

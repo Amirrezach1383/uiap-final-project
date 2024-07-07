@@ -1,6 +1,7 @@
 #ifndef MAINTODOPANEL_H
 #define MAINTODOPANEL_H
 
+#include "qboxlayout.h"
 #include <QMainWindow>
 #include <mainpanel.h>
 #include <QPushButton>
@@ -21,6 +22,7 @@ public:
 
     QHash <QPushButton*, Lists> listButtonMap;
     QHash <QPushButton*, Task> taskButtonMap;
+    QHash <QWidget*, QHBoxLayout*> layoutMap;
 
     explicit MainToDoPanel(QString, std::map<QString, Users>, QWidget *parent = nullptr);
     ~MainToDoPanel();
@@ -52,6 +54,8 @@ public:
     bool taskTitleError ();
     bool assignToOtherError ();
     // // //
+
+    void cleanListsStack ();
 
 private slots:
     void newListPBClicked();
