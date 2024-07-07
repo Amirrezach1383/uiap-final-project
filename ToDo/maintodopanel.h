@@ -58,11 +58,11 @@ public:
     bool assignToOtherError ();
     // // //
 
-    void cleanListsStack ();
+    void cleanStack ();
 
     void cleanSideTaskMenu ();
 
-    void addWidgetToScrollArea (QVBoxLayout*, Task&);
+    void addWidgetToScrollArea (QVBoxLayout*, Task);
 
 private slots:
     void newListPBClicked();

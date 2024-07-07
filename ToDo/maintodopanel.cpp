@@ -79,7 +79,7 @@ void MainToDoPanel::newListPBClicked() {
 void MainToDoPanel::listButtonClicked() {
     QPushButton* listButton = qobject_cast<QPushButton*>(sender());
 
-    cleanListsStack();
+    cleanStack();
 
     unCheckedPB();
 
@@ -136,6 +136,8 @@ void MainToDoPanel::myDayPBClicked() {
     if(ui->myDayPB->isChecked()) {
         ui->mainStack->setCurrentIndex(0);
     }
+
+    setUsersMyDayInfo();
 }
 void MainToDoPanel::importantPBClicked() {
     ui->titleLB->setText("Important");
@@ -314,6 +316,24 @@ void MainToDoPanel::setUsersTasksInfo () {
 }
 void MainToDoPanel::setUsersMyDayInfo () {
     Users userTmp = user[loginUsername];
+    QDate Today;
+    int day = Today.day();
+
+    cleanStack();
+
+    std::list<Lists> tmpList = userTmp.getLists();
+    LinkList<Task> taskList;
+
+    for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
+        taskList = it->getTask();
+        Node<Task> *tmp = taskList.getHeadNode();
+        while (tmp) {
+            if(tmp->getData().getReminder().day() == day) {
+                addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->myDayScrollAFrame->layout()), tmp->getData());
+            }
+
+        }
+    }
 
 }
 void MainToDoPanel::setUsersAssignedInfo () {
@@ -423,7 +443,6 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
         star->setIcon(starOutLineIcon);
 
     QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
-    // QIcon circleFill (":/Image/Icons/fill_circle.png");
     completePB->setIcon(circleOutLine);
 
     QSize size(20, 20);
@@ -432,14 +451,6 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
     completePB->setCheckable(true);
 
     completePB->icon().addFile(":/Image/Icons/fill_circle.png", size, QIcon::Normal, QIcon::On);
-    // if(task.getCompleted()) {
-    //     completePB->setChecked(true);
-    //     completePB->setIcon(circleFill);
-    // }
-    // else {
-    //     completePB->setChecked(false);
-    //     completePB->setIcon(circleOutLine);
-    // }
 
     completePB->setChecked(true);
 
@@ -555,7 +566,7 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
 }
 
-void MainToDoPanel::addWidgetToScrollArea (QVBoxLayout* frame, Task& task) {
+void MainToDoPanel::addWidgetToScrollArea (QVBoxLayout* frame, Task task) {
     QHBoxLayout *itemLayout = new QHBoxLayout;
     QString buttonTitle = task.getTitle();
 
@@ -655,7 +666,7 @@ bool MainToDoPanel::assignToOtherError () {
 
 }
 
-void MainToDoPanel::cleanListsStack () {
+void MainToDoPanel::cleanStack () {
 
     for(auto it = layoutMap.begin(); it != layoutMap.end(); it++) {
 
