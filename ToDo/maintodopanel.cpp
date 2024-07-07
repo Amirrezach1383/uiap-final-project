@@ -105,8 +105,6 @@ void MainToDoPanel::taskCompletePBClicked() {
         completeTask->setIcon(circleOutLine);
     }
 
-
-
     Users userTmp = user[loginUsername];
     Task taskTmp = taskButtonMap[completeTask];
 
@@ -171,6 +169,20 @@ void MainToDoPanel::addTaskPBClicked () {
         addNewTaskItem(tmpTask);
         cleanSideTaskMenu();
     }
+}
+
+void MainToDoPanel::showTaskDetails() {
+    QPushButton *button = qobject_cast<QPushButton*>(sender());
+    QString details = detailsMap[button];
+
+    if(details == "")
+        return;
+
+    QMessageBox msgBox;
+    msgBox.setText(details);
+    msgBox.setWindowTitle(tr("Task Details"));
+    msgBox.exec();
+
 }
 
 void MainToDoPanel::logOutPBClicked() {
@@ -321,9 +333,9 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
         );
 
     QHBoxLayout *itemLayout = new QHBoxLayout;
-    QString labelTitle = ui->taskNameLE->text();
+    QString buttonTitle = ui->taskNameLE->text();
 
-    QLabel *taskLabel = new QLabel(labelTitle);
+    QPushButton *taskLabel = new QPushButton(buttonTitle);
 
     QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
     QPushButton* star = new QPushButton("", ui->listsScrollAFrame);
@@ -369,8 +381,11 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
 
     taskButtonMap.insert(completePB, task);
     layoutMap.insert(widget, itemLayout);
+    detailsMap.insert(taskLabel, task.getDetails());
+
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+    connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
 }
 void MainToDoPanel::addNewTaskInfo (Task& task) {
     task.setTitle(ui->taskNameLE->text());
@@ -406,7 +421,7 @@ void MainToDoPanel::addListsTaskItems(Task task) {
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
 
     QHBoxLayout *itemLayout = new QHBoxLayout;
-    QString labelTitle = task.getTitle();
+    QString buttonTitle = task.getTitle();
 
     QWidget *widget = new QWidget;
 
@@ -417,7 +432,7 @@ void MainToDoPanel::addListsTaskItems(Task task) {
         "}"
         );
 
-    QLabel *taskLabel = new QLabel(labelTitle);
+    QPushButton *taskLabel = new QPushButton(buttonTitle);
 
 
     QPushButton* completePB = new QPushButton("", ui->listsScrollAFrame);
@@ -460,8 +475,10 @@ void MainToDoPanel::addListsTaskItems(Task task) {
 
     taskButtonMap.insert(completePB, task);
     layoutMap.insert(widget, itemLayout);
+    detailsMap.insert(taskLabel, task.getDetails());
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
+    connect(taskLabel, SIGNAL(clicked()), this, SLOT(showTaskDetails()));
 }
 
 

@@ -592,8 +592,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>318</width>
-                        <height>518</height>
+                        <width>92</width>
+                        <height>44</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -716,7 +716,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
+                        <width>92</width>
                         <height>44</height>
                        </rect>
                       </property>
@@ -840,7 +840,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
+                        <width>92</width>
                         <height>44</height>
                        </rect>
                       </property>
@@ -1046,8 +1046,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>318</width>
-                           <height>518</height>
+                           <width>92</width>
+                           <height>44</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -1254,6 +1254,20 @@ QComboBox QAbstractItemView {
                    <string notr="true">QWidget {
 		background-color: rgb(33, 33, 33);
 	border-radius : 5px;
+}
+QPushButton {
+	text-align : left;
+	background : transparent; 
+	border-radius : 5 px;
+	font: 9pt &quot;Playwrite DE Grund&quot;;
+	color: rgb(255, 255, 255);
+	height : 40 px;
+	padding-left:5px;
+	border-radius:5px;
+}
+QPushButton:hover {
+	color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
 }</string>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_7">

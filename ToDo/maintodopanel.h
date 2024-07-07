@@ -23,6 +23,7 @@ public:
     QHash <QPushButton*, Lists> listButtonMap;
     QHash <QPushButton*, Task> taskButtonMap;
     QHash <QWidget*, QHBoxLayout*> layoutMap;
+    QHash <QPushButton*, QString> detailsMap;
 
     explicit MainToDoPanel(QString, std::map<QString, Users>, QWidget *parent = nullptr);
     ~MainToDoPanel();
@@ -76,6 +77,8 @@ private slots:
     void logOutPBClicked();
 
     void addTaskPBClicked();
+
+    void showTaskDetails();
 
 private:
     Ui::MainToDoPanel *ui;
