@@ -47,6 +47,7 @@ public:
 
     void addNewTaskItem (Task&);
     void addNewTaskInfo (Task&);
+    void addNewTaskToUserLists (Task&);
 
     // Error Functions
     bool allErrors ();

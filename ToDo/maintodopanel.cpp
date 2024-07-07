@@ -1,4 +1,5 @@
 #include "maintodopanel.h"
+#include "qregularexpression.h"
 #include "ui_maintodopanel.h"
 
 MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QWidget *parent)
@@ -71,6 +72,8 @@ void MainToDoPanel::newListPBClicked() {
 }
 void MainToDoPanel::listButtonClicked() {
     QPushButton* listButton = qobject_cast<QPushButton*>(sender());
+
+    cleanListsStack();
 
     unCheckedPB();
 
@@ -245,10 +248,10 @@ void MainToDoPanel::setListsBackGround(Color c) {
 
     if(c == Blue) {
         ui->listsBKG->setStyleSheet(
-        "QWidget {"
+            "QWidget {"
             "background-color: rgb(66, 56, 246);"
             "border-radius : 5px;"
-                "}"
+            "}"
             );
 
     }
@@ -302,6 +305,7 @@ void MainToDoPanel::addNewListToUsersList (Lists& newList) {
     userTmp.addToLists(newList);
     user[loginUsername] = userTmp;
 }
+
 void MainToDoPanel::addNewTaskItem (Task& task) {
 
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
@@ -366,17 +370,36 @@ void MainToDoPanel::addNewTaskItem (Task& task) {
 
     connect(completePB, SIGNAL(clicked()), this, SLOT(taskCompletePBClicked()));
 }
-
-/// //// //// /// // Add date After
 void MainToDoPanel::addNewTaskInfo (Task& task) {
     task.setTitle(ui->taskNameLE->text());
     task.setDetails(ui->detailsTE->toPlainText());
     task.setAssignedUser(ui->assignToOtherLE->text());
     task.setFavorite(ui->favPB->isChecked());
     task.setCompleted(ui->completePBSideMenu->isChecked());
-
+    task.setReminder(ui->calendarWidget->selectedDate());
 }
-/////////////
+void MainToDoPanel::addNewTaskToUserLists(Task & task) {
+    Lists selectedList;
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); it++)
+        if(it.key()->isChecked()) {
+            selectedList = it.value();
+            break;
+        }
+
+    selectedList.addTask(task);
+
+    for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it)
+        if(it.key()->isChecked()) {
+            it.value() = selectedList;
+            break;
+        }
+
+    Users userTmp = user[loginUsername];
+    userTmp.setLists(selectedList.getListID(), selectedList);
+
+    user[loginUsername] = userTmp;
+}
+
 void MainToDoPanel::addListsTaskItems(Task task) {
     QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsScrollAFrame->layout());
 
