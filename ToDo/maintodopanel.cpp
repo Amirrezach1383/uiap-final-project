@@ -14,7 +14,7 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     ui->sideTasksMenu->setHidden(true);
 
-    setUsersTasksInfo();
+    setUsersInfoInPanel();
 
     // Connects
     connect(ui->myDayPB, SIGNAL(clicked()), this, SLOT(myDayPBClicked()));
@@ -50,10 +50,23 @@ void MainToDoPanel::unCheckedPB() {
 }
 
 void MainToDoPanel::unCheckedListButton() {
+    QPushButton* button;
     ui->sideTasksMenu->setHidden(true);
     for(auto it = listButtonMap.begin(); it != listButtonMap.end(); ++it) {
-        if(it.key()->isChecked()) {
-            it.key()->setChecked(false);
+        button = qobject_cast<QPushButton*>(it.key());
+        if(button->isChecked()) {
+            button->setStyleSheet(
+                "QPushButton {"
+                "text-align : left;"
+                "background : transparent; "
+                "border-radius : 5 px;"
+                "font: 9pt Playwrite DE Grund;"
+                "color: rgb(255, 255, 255);"
+                "height : 40 px;"
+                "padding-left:5px;"
+                "border-radius:5px;"
+                "}");
+            button->setChecked(false);
         }
     }
 }
@@ -88,6 +101,12 @@ void MainToDoPanel::newListPBClicked() {
 }
 void MainToDoPanel::listButtonClicked() {
     QPushButton* listButton = qobject_cast<QPushButton*>(sender());
+    Lists selectedList = listButtonMap[listButton];
+
+    Color c = selectedList.getColor();
+    setListsBackGround(c);
+
+    setComboBox(selectedList);
 
     cleanStack();
 
@@ -95,11 +114,6 @@ void MainToDoPanel::listButtonClicked() {
 
     ui->mainStack->setCurrentIndex(ui->mainStack->indexOf(ui->Lists));
     ui->titleLB->setText(listButton->text());
-
-    Lists selectedList = listButtonMap[listButton];
-
-    Color c = selectedList.getColor();
-    setListsBackGround(c);
 
     setListsTaskInfo(selectedList);
 
@@ -142,34 +156,33 @@ void MainToDoPanel::taskCompletePBClicked() {
 /// Fixed Menu Buttons
 
 void MainToDoPanel::myDayPBClicked() {
-    ui->titleLB->setText("My Day");
     if(ui->myDayPB->isChecked()) {
+        ui->titleLB->setText("My Day");
         ui->mainStack->setCurrentIndex(0);
+        setUsersMyDayInfo();
     }
 
-    setUsersMyDayInfo();
 }
 void MainToDoPanel::importantPBClicked() {
-    ui->titleLB->setText("Important");
     if(ui->importantPB->isChecked()) {
+        ui->titleLB->setText("Important");
         ui->mainStack->setCurrentIndex(1);
+        setUsersImportantInfo();
     }
-    setUsersImportantInfo();
 }
 void MainToDoPanel::assignedPBClicked() {
-    ui->titleLB->setText("Assigned To Me");
     if(ui->assignedToMePB->isChecked()) {
+        ui->titleLB->setText("Assigned To Me");
         ui->mainStack->setCurrentIndex(2);
+        setUsersAssignedInfo();
     }
-    setUsersAssignedInfo();
 }
 void MainToDoPanel::taskPBClicked() {
     ui->titleLB->setText("Tasks");
     if(ui->tasksPB->isChecked()) {
-        unCheckedListButton ();
         ui->mainStack->setCurrentIndex(3);
+        setUsersTasksInfo();
     }
-    setUsersTasksInfo();
 }
 
 /// /// ///
@@ -392,9 +405,8 @@ void MainToDoPanel::setUsersMyDayInfo () {
         while (tmp) {
             if(tmp->getData().getReminder().day() == day) {
                 addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->myDayScrollAFrame->layout()), tmp->getData());
-                tmp = tmp->getNextNode();
             }
-
+            tmp = tmp->getNextNode();
         }
     }
 
@@ -441,9 +453,8 @@ void MainToDoPanel::setUsersImportantInfo () {
         while (tmp) {
             if(tmp->getData().getFavorite()) {
                 addWidgetToScrollArea(qobject_cast<QVBoxLayout*>(ui->importantScrollAFrame->layout()), tmp->getData());
-                tmp = tmp->getNextNode();
             }
-
+            tmp = tmp->getNextNode();
         }
     }
 
@@ -872,4 +883,32 @@ bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
 void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
     toDoDB.close();
     toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
+}
+
+void MainToDoPanel::setComboBox(Lists& list) {
+    if(list.getColor() == Red) {
+        ui->colorComboBox->setCurrentText("Red");
+        return;
+    }
+    if(list.getColor() == Green) {
+        ui->colorComboBox->setCurrentText("Green");
+        return;
+    }
+    if(list.getColor() == Black) {
+        ui->colorComboBox->setCurrentText("Black");
+        return;
+    }
+    if(list.getColor() == Blue) {
+        ui->colorComboBox->setCurrentText("Blue");
+        return;
+    }
+    if(list.getColor() == Default) {
+        ui->colorComboBox->setCurrentText("Default");
+        return;
+    }
+    if(list.getColor() == Yellow) {
+        ui->colorComboBox->setCurrentText("Yellow");
+        return;
+    }
+
 }

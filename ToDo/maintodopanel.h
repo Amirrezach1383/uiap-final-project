@@ -79,6 +79,8 @@ public:
     bool openDB(QSqlDatabase&);
     void closeDB(QSqlDatabase&);
 
+    void setComboBox (Lists &);
+
 private slots:
     void newListPBClicked();
     void listButtonClicked();

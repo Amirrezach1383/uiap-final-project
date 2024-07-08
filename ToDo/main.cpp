@@ -81,7 +81,7 @@ void setTask (std::vector<Task>& task) {
         bool completed = qry.value("Completed").toInt();
         QString assigned = qry.value("Assigned").toString();
         QString reminder = qry.value("Reminder").toString();
-        int listID = qry.value("List ID").toInt();
+        int listID = qry.value("ListID").toInt();
         int taskID = qry.value("TaskID").toInt();
 
         Task tmpTask;
