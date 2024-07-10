@@ -15,6 +15,7 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
     ui->sideTasksMenu->setHidden(true);
 
     setUsersInfoInPanel();
+    setUsersListInfo();
 
     // Connects
     connect(ui->myDayPB, SIGNAL(clicked()), this, SLOT(myDayPBClicked()));
@@ -41,6 +42,7 @@ MainToDoPanel::~MainToDoPanel()
     delete ui;
 }
 
+// Checked and UnChecked PB's
 void MainToDoPanel::unCheckedPB() {
 
     ui->myDayPB->setChecked(false);
@@ -48,7 +50,6 @@ void MainToDoPanel::unCheckedPB() {
     ui->tasksPB->setChecked(false);
     ui->importantPB->setChecked(false);
 }
-
 void MainToDoPanel::unCheckedListButton() {
     QPushButton* button;
     ui->sideTasksMenu->setHidden(true);
@@ -65,40 +66,21 @@ void MainToDoPanel::unCheckedListButton() {
                 "height : 40 px;"
                 "padding-left:5px;"
                 "border-radius:5px;"
-                "}");
+                "}"
+                "QPushButton:hover {"
+                "background-color: rgb(51, 51, 51);"
+                "font: 700 9pt Playwrite DE Grund;"
+                "}"
+                );
             button->setChecked(false);
         }
     }
 }
-// Private Slots
 
-void MainToDoPanel::newListPBClicked() {
-    Lists newList;
-    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsFrame->layout());
+// --- ---- ---- ----- ----- Private Slots ------ ----- ------ -----
 
-    QString buttonText = tr("List %1").arg(frameLayout->count());
-    QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
 
-    ui->listsBKG->setStyleSheet("");
-
-    newList.setTitle(buttonText);
-
-    QIcon icon (":/Image/Icons/list_icon.png");
-    listButton->setIcon(icon);
-
-    QSize size (20, 20);
-    listButton->setIconSize(size);
-
-    listButton->setCheckable(true);
-    listButton->setAutoExclusive(true);
-
-    frameLayout->insertWidget(frameLayout->count() - 1, listButton);
-
-    addNewListToUsersList(newList);
-    listButtonMap.insert(listButton, newList);
-
-    connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
-}
+// Add Task Menu Slots ----- ----- ------ ------ ------
 void MainToDoPanel::listButtonClicked() {
     QPushButton* listButton = qobject_cast<QPushButton*>(sender());
     Lists selectedList = listButtonMap[listButton];
@@ -118,7 +100,118 @@ void MainToDoPanel::listButtonClicked() {
     setListsTaskInfo(selectedList);
 
 }
+void MainToDoPanel::addTaskPBClicked () {
+    if(!allErrors()) {
+        Task tmpTask;
+        addNewTaskInfo(tmpTask);
+        addNewTaskToUserLists(tmpTask);
+        addNewTaskItem(tmpTask);
+        // addTaskToDB(tmpTask);
+        cleanSideTaskMenu();
+    }
+}
 
+// Fixed Menu Slots ------ ------ ------ -----
+void MainToDoPanel::myDayPBClicked() {
+    if(ui->myDayPB->isChecked()) {
+        ui->titleLB->setText("My Day");
+        ui->mainStack->setCurrentIndex(0);
+        setUsersMyDayInfo();
+    }
+
+}
+void MainToDoPanel::importantPBClicked() {
+    if(ui->importantPB->isChecked()) {
+        ui->titleLB->setText("Important");
+        ui->mainStack->setCurrentIndex(1);
+        setUsersImportantInfo();
+    }
+}
+void MainToDoPanel::assignedPBClicked() {
+    if(ui->assignedToMePB->isChecked()) {
+        ui->titleLB->setText("Assigned To Me");
+        ui->mainStack->setCurrentIndex(2);
+        setUsersAssignedInfo();
+    }
+}
+void MainToDoPanel::taskPBClicked() {
+    ui->titleLB->setText("Tasks");
+    if(ui->tasksPB->isChecked()) {
+        ui->mainStack->setCurrentIndex(3);
+        setUsersTasksInfo();
+    }
+}
+
+void MainToDoPanel::newListPBClicked() {
+    Lists newList;
+    QVBoxLayout *frameLayout = qobject_cast<QVBoxLayout*>(ui->listsFrame->layout());
+
+    QString buttonText = tr("List %1").arg(frameLayout->count());
+
+    QPushButton *listButton = new QPushButton(buttonText, ui->listsFrame);
+    listButton->setStyleSheet(
+        "QPushButton {"
+        "text-align : left;"
+        "background : transparent; "
+        "border-radius : 5 px;"
+        "font: 9pt Playwrite DE Grund;"
+        "color: rgb(255, 255, 255);"
+        "height : 40 px;"
+        "padding-left:5px;"
+        "border-radius:5px;"
+        "}"
+        "QPushButton:hover {"
+        "background-color: rgb(51, 51, 51);"
+        "font: 700 9pt Playwrite DE Grund;"
+        "}"
+        "QPushButton:checked {"
+        "background-color: rgb(51, 51, 51);"
+        "font: 700 9pt Playwrite DE Grund;"
+        "}");
+
+    newList.setTitle(buttonText);
+
+    QIcon icon (":/Image/Icons/list_icon.png");
+    listButton->setIcon(icon);
+
+    QSize size (20, 20);
+    listButton->setIconSize(size);
+
+    listButton->setCheckable(true);
+    listButton->setAutoExclusive(true);
+
+    frameLayout->insertWidget(frameLayout->count() - 1, listButton);
+
+    addNewListToUsersList(newList);
+    listButtonMap.insert(listButton, newList);
+
+    // addListToDB(newList);
+
+    connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
+}
+
+// Tasks Slots ---- ----- ----- ---- ----- ---
+void MainToDoPanel::listNewTaskPBClicked () {
+    if(ui->listsNewTaskPB->isChecked()) {
+        ui->sideTasksMenu->setVisible(true);
+    } else {
+        ui->sideTasksMenu->setHidden(true);
+    }
+}
+void MainToDoPanel::showTaskDetails() {
+    QPushButton *button = qobject_cast<QPushButton*>(sender());
+    QString details = detailsMap[button];
+
+    if(details == "")
+        return;
+
+    QMessageBox msgBox;
+    msgBox.setText(details);
+    msgBox.setWindowTitle(tr("Task Details"));
+    msgBox
+    msgBox.exec();
+
+}
 void MainToDoPanel::taskCompletePBClicked() {
 
     QIcon circleOutLine (":/Image/Icons/out_line_circle.png");
@@ -151,72 +244,6 @@ void MainToDoPanel::taskCompletePBClicked() {
     user[loginUsername] = userTmp;
 
     taskButtonMap[completeTask] = taskTmp;
-}
-
-/// Fixed Menu Buttons
-
-void MainToDoPanel::myDayPBClicked() {
-    if(ui->myDayPB->isChecked()) {
-        ui->titleLB->setText("My Day");
-        ui->mainStack->setCurrentIndex(0);
-        setUsersMyDayInfo();
-    }
-
-}
-void MainToDoPanel::importantPBClicked() {
-    if(ui->importantPB->isChecked()) {
-        ui->titleLB->setText("Important");
-        ui->mainStack->setCurrentIndex(1);
-        setUsersImportantInfo();
-    }
-}
-void MainToDoPanel::assignedPBClicked() {
-    if(ui->assignedToMePB->isChecked()) {
-        ui->titleLB->setText("Assigned To Me");
-        ui->mainStack->setCurrentIndex(2);
-        setUsersAssignedInfo();
-    }
-}
-void MainToDoPanel::taskPBClicked() {
-    ui->titleLB->setText("Tasks");
-    if(ui->tasksPB->isChecked()) {
-        ui->mainStack->setCurrentIndex(3);
-        setUsersTasksInfo();
-    }
-}
-
-/// /// ///
-
-void MainToDoPanel::listNewTaskPBClicked () {
-    if(ui->listsNewTaskPB->isChecked()) {
-        ui->sideTasksMenu->setVisible(true);
-    } else {
-        ui->sideTasksMenu->setHidden(true);
-    }
-}
-
-void MainToDoPanel::addTaskPBClicked () {
-    if(!allErrors()) {
-        Task tmpTask;
-        addNewTaskInfo(tmpTask);
-        addNewTaskToUserLists(tmpTask);
-        addNewTaskItem(tmpTask);
-        cleanSideTaskMenu();
-    }
-}
-
-void MainToDoPanel::showTaskDetails() {
-    QPushButton *button = qobject_cast<QPushButton*>(sender());
-    QString details = detailsMap[button];
-
-    if(details == "")
-        return;
-
-    QMessageBox msgBox;
-    msgBox.setText(details);
-    msgBox.setWindowTitle(tr("Task Details"));
-    msgBox.exec();
-
 }
 
 void MainToDoPanel::comboBoxChanged() {
@@ -266,7 +293,7 @@ void MainToDoPanel::logOutPBClicked() {
     panel->show();
     this->close();
 }
-// // // //
+//------- -------- ------- -------- -------
 
 void MainToDoPanel::updateListBackground(Color c) {
     Lists tmpList;
@@ -304,13 +331,13 @@ void MainToDoPanel::getPDFOutPut () {
     }
 
     QString fileName = QFileDialog::getSaveFileName((QWidget*)0, "Export PDF", QString(QString::number(list.getListID())), "*.pdf");
-    if(QFileInfo(fileName).suffix().isEmpty()) { fileName.append("*.pdf");}
+    if(QFileInfo(fileName).suffix().isEmpty()) { fileName.append("*.pdf"); }
 
     QPrinter printer(QPrinter::PrinterResolution);
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(fileName);
 
-    doc.setHtml("<h1>"+list.getTile()+"</h1>\n");
+    QString htmlContent = "<h1>" + list.getTile() + "</h1>\n";
 
     tmpTask = list.getTask();
     Node<Task> *tmp = tmpTask.getHeadNode();
@@ -324,11 +351,14 @@ void MainToDoPanel::getPDFOutPut () {
         else
             string = "Not Completed";
 
-        doc.setHtml("<p> Task : "+QString::number(task.getTaskID())+" Title : "+task.getTitle()+" Details : "+ task.getDetails() +" Assigned User : "+ task.getAssignedUser() +" Task State : "+ string +"</p>\n");
+        htmlContent += "<p> Task : " + QString::number(task.getTaskID()) + " Title : " + task.getTitle() +
+                       " Details : " + task.getDetails() + " Assigned User : " + task.getAssignedUser() +
+                       " Task State : " + string + "</p>\n";
         tmp = tmp->getNextNode();
     }
-
+    doc.setHtml(htmlContent);
     doc.print(&printer);
+
 }
 
 // Set Info Functions
@@ -343,6 +373,9 @@ void MainToDoPanel::setUsersListInfo () {
 
     std::list<Lists> listTmp = userTmp.getLists();
 
+    if(listTmp.size() == 0) {
+        return;
+    }
     for(auto it = listTmp.begin(); it != userTmp.getLists().end(); it++) {
         addUsersListPB(*it);
     }
@@ -525,7 +558,6 @@ void MainToDoPanel::setListsBackGround(Color c) {
 }
 
 // Add functions
-
 void MainToDoPanel::addNewListToUsersList (Lists& newList) {
 
     Users userTmp = user[loginUsername];
@@ -833,57 +865,57 @@ void MainToDoPanel::checkReminder () {
     QMessageBox::information(nullptr, "Reminder", string);
 }
 
-void MainToDoPanel::addTaskToDB (Task& task) {
-    QSqlDatabase toDoDB;
-    if(!openDB(toDoDB))
-        return;
+// void MainToDoPanel::addTaskToDB (Task& task) {
+//     QSqlDatabase toDoDB;
+//     if(!openDB(toDoDB))
+//         return;
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO Task (Title, Details, Favorit, Completed, AssignedUser, Reminder, TaskID, ListID) VALUES (:title, :details, :favorit, :completed, :assignedUser, :reminder, :taskid, :listid)");
-    query.bindValue(":title", task.getTitle());
-    query.bindValue(":details", task.getDetails());
-    query.bindValue(":favorite", task.getFavorite());
-    query.bindValue(":completed", task.getCompleted());
-    query.bindValue(":assignedUser", task.getAssignedUser());
-    query.bindValue(":reminder", task.getReminder());
-    query.bindValue(":taskid", task.getTaskID());
-    query.bindValue(":listid", task.getListID());
+//     QSqlQuery query;
+//     query.prepare("INSERT INTO Task (Title, Details, Favorit, Completed, AssignedUser, Reminder, TaskID, ListID) VALUES (:title, :details, :favorit, :completed, :assignedUser, :reminder, :taskid, :listid)");
+//     query.bindValue(":title", task.getTitle());
+//     query.bindValue(":details", task.getDetails());
+//     query.bindValue(":favorite", task.getFavorite());
+//     query.bindValue(":completed", task.getCompleted());
+//     query.bindValue(":assignedUser", task.getAssignedUser());
+//     query.bindValue(":reminder", task.getReminder());
+//     query.bindValue(":taskid", task.getTaskID());
+//     query.bindValue(":listid", task.getListID());
 
-    query.exec();
+//     query.exec();
 
-    closeDB(toDoDB);
-}
-void MainToDoPanel::addListToDB (Lists& list) {
+//     closeDB(toDoDB);
+// }
+// void MainToDoPanel::addListToDB (Lists& list) {
 
-    QSqlDatabase toDoDB;
-    if(!openDB(toDoDB))
-        return;
+//     QSqlDatabase toDoDB;
+//     if(!openDB(toDoDB))
+//         return;
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO Lists (Username, ListID, Title, Color) VALUES (:username, :listId, :title, :color)");
+//     QSqlQuery query;
+//     query.prepare("INSERT INTO Lists (Username, ListID, Title, Color) VALUES (:username, :listId, :title, :color)");
 
-    query.bindValue(":username", loginUsername);
-    query.bindValue(":listId", list.getListID());
-    query.bindValue(":title", list.getTile());
-    query.bindValue(":color", QString::number(static_cast<int>(list.getColor())));
+//     query.bindValue(":username", loginUsername);
+//     query.bindValue(":listId", list.getListID());
+//     query.bindValue(":title", list.getTile());
+//     query.bindValue(":color", QString::number(static_cast<int>(list.getColor())));
 
-    query.exec();
-    closeDB(toDoDB);
+//     query.exec();
+//     closeDB(toDoDB);
 
-}
+// }
 
-bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
-    toDoDB = QSqlDatabase::addDatabase("QSQLITE");
-    toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
+// bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
+//     toDoDB = QSqlDatabase::addDatabase("QSQLITE");
+//     toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
 
-    if(toDoDB.open())
-        return true;
-    return false;
-}
-void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
-    toDoDB.close();
-    toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
-}
+//     if(toDoDB.open())
+//         return true;
+//     return false;
+// }
+// void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
+//     toDoDB.close();
+//     toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
+// }
 
 void MainToDoPanel::setComboBox(Lists& list) {
     if(list.getColor() == Red) {

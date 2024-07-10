@@ -1,6 +1,6 @@
 #include "lists.h"
 
-Lists::Lists() : title("Untitled List") {}
+Lists::Lists() : title(""), color(Default) {}
 
 void Lists::setListID (int d) {
     listID = d;

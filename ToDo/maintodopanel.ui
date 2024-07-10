@@ -510,7 +510,7 @@ border-radius : 5px;
 </string>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>4</number>
             </property>
             <widget class="QWidget" name="myDay">
              <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -591,8 +591,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>44</height>
+                        <width>317</width>
+                        <height>518</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -714,7 +714,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
+                        <width>92</width>
                         <height>44</height>
                        </rect>
                       </property>
@@ -838,7 +838,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
+                        <width>92</width>
                         <height>44</height>
                        </rect>
                       </property>
@@ -1263,7 +1263,11 @@ QPushButton {
 	border-radius:5px;
 }
 QPushButton:hover {
-	color: rgb(51, 51, 51);
+	background-color: rgb(51, 51, 51);
+	font: 700 9pt &quot;Playwrite DE Grund&quot;;
+}
+QPushButton:checked {
+	background-color: rgb(51, 51, 51);
 	font: 700 9pt &quot;Playwrite DE Grund&quot;;
 }</string>
                   </property>
@@ -1329,8 +1333,8 @@ background-color: rgb(50, 50, 50);
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>44</height>
+                        <width>317</width>
+                        <height>411</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_27">

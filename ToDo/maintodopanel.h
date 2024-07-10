@@ -73,11 +73,11 @@ public:
 
     void checkReminder ();
 
-    void addListToDB (Lists&);
-    void addTaskToDB (Task&);
+    // void addListToDB (Lists&);
+    // void addTaskToDB (Task&);
 
-    bool openDB(QSqlDatabase&);
-    void closeDB(QSqlDatabase&);
+    // bool openDB(QSqlDatabase&);
+    // void closeDB(QSqlDatabase&);
 
     void setComboBox (Lists &);
 
