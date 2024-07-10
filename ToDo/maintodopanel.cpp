@@ -208,7 +208,8 @@ void MainToDoPanel::showTaskDetails() {
     QMessageBox msgBox;
     msgBox.setText(details);
     msgBox.setWindowTitle(tr("Task Details"));
-    msgBox
+    QPixmap pixmap (":/Image/Icons/icons8-info-50.png");
+    msgBox.setIconPixmap(pixmap);
     msgBox.exec();
 
 }
