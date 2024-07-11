@@ -107,7 +107,7 @@ void MainToDoPanel::addTaskPBClicked () {
         addNewTaskInfo(tmpTask);
         addNewTaskToUserLists(tmpTask);
         addNewTaskItem(tmpTask);
-        // addTaskToDB(tmpTask);
+        addTaskToDB(tmpTask);
         cleanSideTaskMenu();
     }
 }
@@ -246,6 +246,8 @@ void MainToDoPanel::taskCompletePBClicked() {
     user[loginUsername] = userTmp;
 
     taskButtonMap[completeTask] = taskTmp;
+
+    updateTaskInDB (taskTmp);
 }
 
 void MainToDoPanel::comboBoxChanged() {
@@ -854,9 +856,16 @@ void MainToDoPanel::checkReminder () {
     std::list<Lists> tmpList = userTmp.getLists();
     QString string;
 
+    if(tmpList.size() == 0)
+        return;
+
     for(auto it = tmpList.begin(); it != tmpList.end(); ++it) {
         LinkList<Task> listTmp = it->getTask();
         Node<Task> * tmp = listTmp.getHeadNode();
+
+        if(listTmp.getSize() == 0)
+            continue;
+
         while(tmp) {
             if(tmp->getData().getReminder() == QDate::currentDate()) {
                 string += "\n" + tmp->getData().getTitle();
@@ -864,6 +873,10 @@ void MainToDoPanel::checkReminder () {
             tmp = tmp->getNextNode();
         }
     }
+
+    if(string == "")
+        return;
+
     QMessageBox::information(nullptr, "Reminder", string);
 }
 
@@ -904,6 +917,22 @@ void MainToDoPanel::addListToDB (Lists& list) {
     query.exec();
     closeDB(toDoDB);
 
+}
+void MainToDoPanel::updateTaskInDB (Task& task) {
+
+    QSqlDatabase toDoDB;
+    if(!openDB(toDoDB))
+        return;
+
+    QSqlQuery query;
+    query.prepare("Update Task Set Completed = :completed WHERE TaskID = :taskID");
+
+    query.bindValue(":completed", task.getCompleted());
+    query.bindValue(":taskID", task.getTaskID());
+
+    query.exec();
+
+    closeDB(toDoDB);
 }
 
 bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {

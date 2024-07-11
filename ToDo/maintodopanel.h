@@ -75,6 +75,7 @@ public:
 
     void addListToDB (Lists&);
     void addTaskToDB (Task&);
+    void updateTaskInDB (Task&);
 
     bool openDB(QSqlDatabase&);
     void closeDB(QSqlDatabase&);
