@@ -14,6 +14,7 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
 
     ui->sideTasksMenu->setHidden(true);
 
+    checkReminder();
     setUsersInfoInPanel();
     setUsersListInfo();
 
@@ -185,7 +186,7 @@ void MainToDoPanel::newListPBClicked() {
     addNewListToUsersList(newList);
     listButtonMap.insert(listButton, newList);
 
-    // addListToDB(newList);
+    addListToDB(newList);
 
     connect(listButton, SIGNAL(clicked()), this, SLOT(listButtonClicked()));
 }
@@ -377,7 +378,7 @@ void MainToDoPanel::setUsersListInfo () {
     if(listTmp.size() == 0) {
         return;
     }
-    for(auto it = listTmp.begin(); it != userTmp.getLists().end(); it++) {
+    for(auto it = listTmp.begin(); it != listTmp.end(); it++) {
         addUsersListPB(*it);
     }
 
@@ -866,57 +867,57 @@ void MainToDoPanel::checkReminder () {
     QMessageBox::information(nullptr, "Reminder", string);
 }
 
-// void MainToDoPanel::addTaskToDB (Task& task) {
-//     QSqlDatabase toDoDB;
-//     if(!openDB(toDoDB))
-//         return;
+void MainToDoPanel::addTaskToDB (Task& task) {
+    QSqlDatabase toDoDB;
+    if(!openDB(toDoDB))
+        return;
 
-//     QSqlQuery query;
-//     query.prepare("INSERT INTO Task (Title, Details, Favorit, Completed, AssignedUser, Reminder, TaskID, ListID) VALUES (:title, :details, :favorit, :completed, :assignedUser, :reminder, :taskid, :listid)");
-//     query.bindValue(":title", task.getTitle());
-//     query.bindValue(":details", task.getDetails());
-//     query.bindValue(":favorite", task.getFavorite());
-//     query.bindValue(":completed", task.getCompleted());
-//     query.bindValue(":assignedUser", task.getAssignedUser());
-//     query.bindValue(":reminder", task.getReminder());
-//     query.bindValue(":taskid", task.getTaskID());
-//     query.bindValue(":listid", task.getListID());
+    QSqlQuery query;
+    query.prepare("INSERT INTO Task (Title, Details, Favorit, Completed, AssignedUser, Reminder, TaskID, ListID) VALUES (:title, :details, :favorit, :completed, :assignedUser, :reminder, :taskid, :listid)");
+    query.bindValue(":title", task.getTitle());
+    query.bindValue(":details", task.getDetails());
+    query.bindValue(":favorite", task.getFavorite());
+    query.bindValue(":completed", task.getCompleted());
+    query.bindValue(":assignedUser", task.getAssignedUser());
+    query.bindValue(":reminder", task.getReminder());
+    query.bindValue(":taskid", task.getTaskID());
+    query.bindValue(":listid", task.getListID());
 
-//     query.exec();
+    query.exec();
 
-//     closeDB(toDoDB);
-// }
-// void MainToDoPanel::addListToDB (Lists& list) {
+    closeDB(toDoDB);
+}
+void MainToDoPanel::addListToDB (Lists& list) {
 
-//     QSqlDatabase toDoDB;
-//     if(!openDB(toDoDB))
-//         return;
+    QSqlDatabase toDoDB;
+    if(!openDB(toDoDB))
+        return;
 
-//     QSqlQuery query;
-//     query.prepare("INSERT INTO Lists (Username, ListID, Title, Color) VALUES (:username, :listId, :title, :color)");
+    QSqlQuery query;
+    query.prepare("INSERT INTO Lists (Username, ListID, Title, Color) VALUES (:username, :listId, :title, :color)");
 
-//     query.bindValue(":username", loginUsername);
-//     query.bindValue(":listId", list.getListID());
-//     query.bindValue(":title", list.getTile());
-//     query.bindValue(":color", QString::number(static_cast<int>(list.getColor())));
+    query.bindValue(":username", loginUsername);
+    query.bindValue(":listId", list.getListID());
+    query.bindValue(":title", list.getTile());
+    query.bindValue(":color", QString::number(static_cast<int>(list.getColor())));
 
-//     query.exec();
-//     closeDB(toDoDB);
+    query.exec();
+    closeDB(toDoDB);
 
-// }
+}
 
-// bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
-//     toDoDB = QSqlDatabase::addDatabase("QSQLITE");
-//     toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
+bool MainToDoPanel::openDB(QSqlDatabase &toDoDB) {
+    toDoDB = QSqlDatabase::addDatabase("QSQLITE");
+    toDoDB.setDatabaseName("E:/Final Project/uiap-final-project-Amirrezach1383/ToDo/To_Do_DB.db");
 
-//     if(toDoDB.open())
-//         return true;
-//     return false;
-// }
-// void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
-//     toDoDB.close();
-//     toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
-// }
+    if(toDoDB.open())
+        return true;
+    return false;
+}
+void MainToDoPanel::closeDB(QSqlDatabase &toDoDB) {
+    toDoDB.close();
+    toDoDB.removeDatabase(QSqlDatabase::defaultConnection);
+}
 
 void MainToDoPanel::setComboBox(Lists& list) {
     if(list.getColor() == Red) {

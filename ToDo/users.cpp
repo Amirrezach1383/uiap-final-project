@@ -25,6 +25,7 @@ void Users::setLists(int listID, Lists &list) {
     for(auto it = lists.begin(); it != lists.end(); it++) {
         if(it->getListID() == listID) {
             *it = list;
+            break;
         }
     }
 }
