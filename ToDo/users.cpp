@@ -16,7 +16,7 @@ void Users::setLastName (QString d) {
     lastName = d;
 }
 void Users::addToLists (Lists& d) {
-    d.setListID(lists.size() + 1);
+    d.setListID(lists.size() + (username.toInt() % 20));
     d.setUsername(this->username);
     lists.push_back(d);
 }

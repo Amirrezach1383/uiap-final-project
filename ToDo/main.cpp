@@ -1,5 +1,4 @@
 #include "mainpanel.h"
-#include "maintodopanel.h"
 #include <QApplication>
 #include <QtSql>
 
@@ -27,8 +26,7 @@ int main(int argc, char *argv[]) {
     } else
         return 0;
 
-    // MainPanel w(user);
-    MainToDoPanel w(*new QString, user);
+    MainPanel w(user);
     w.show();
 
     return a.exec();
