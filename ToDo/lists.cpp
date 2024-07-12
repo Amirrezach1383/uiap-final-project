@@ -14,7 +14,7 @@ void Lists::setTitle (QString d) {
 void Lists::setColor (Color d) {
     color = d;
 }
-void Lists::addTask (Task d) {
+void Lists::addTask (Task& d) {
     d.setTaskID(taskList.getSize() + 1);
     d.setListID(listID);
     taskList << d;

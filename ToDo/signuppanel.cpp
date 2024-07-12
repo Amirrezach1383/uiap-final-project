@@ -9,6 +9,11 @@ SignUpPanel::SignUpPanel(std::map<QString, Users> users, QWidget *parent)
     , ui(new Ui::SignUpPanel){
     ui->setupUi(this);
 
+    this->setWindowTitle("Sign Up");
+
+    QIcon icon (":/Image/Icons/icons8-to-do-48.png");
+    this->setWindowIcon(icon);
+
     connect(ui->signUpPB, SIGNAL(clicked()), this, SLOT(signUpPBClicked()));
     connect(ui->backPB, SIGNAL(clicked()), this, SLOT(backPBClicked()));
 

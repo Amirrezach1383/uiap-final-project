@@ -8,6 +8,11 @@ MainToDoPanel::MainToDoPanel(QString username, std::map<QString, Users> users,QW
     , ui(new Ui::MainToDoPanel) {
     ui->setupUi(this);
 
+    this->setWindowTitle("To Do");
+
+    QIcon icon (":/Image/Icons/icons8-to-do-48.png");
+    this->setWindowIcon(icon);
+
     ui->myDayPB->setChecked(true);
     ui->mainStack->setCurrentIndex(0);
     ui->titleLB->setText("My Day");

@@ -10,6 +10,11 @@ MainPanel::MainPanel(std::map<QString, Users> users, QWidget *parent) : QMainWin
 
     ui->setupUi(this);
 
+    this->setWindowTitle("Dashboard");
+
+    QIcon icon (":/Image/Icons/icons8-to-do-48.png");
+    this->setWindowIcon(icon);
+
     connect(ui->signinPB, SIGNAL(clicked()), this, SLOT(signinPBClicked()));
     connect(ui->loginPB, SIGNAL(clicked()), this, SLOT(loginPBClicked()));
 }

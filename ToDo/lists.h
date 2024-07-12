@@ -17,7 +17,7 @@ public:
     void setUsername (QString);
     void setTitle (QString);
     void setColor (Color);
-    void addTask (Task);
+    void addTask (Task&);
     void setTask (int, Task);
 
     QString getUsername ();

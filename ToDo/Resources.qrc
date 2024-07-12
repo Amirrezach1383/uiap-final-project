@@ -45,5 +45,6 @@
         <file>Image/Icons/icons8-info-50.png</file>
         <file>Image/Icons/icons8-eye-48.png</file>
         <file>Image/Icons/icons8-invisible-48.png</file>
+        <file>Image/Icons/icons8-to-do-48.png</file>
     </qresource>
 </RCC>

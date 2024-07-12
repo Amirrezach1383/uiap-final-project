@@ -109,7 +109,7 @@ background: transparent;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QLabel {
-	font: 10pt &quot;Playwrite DE Grund&quot;;
+	font: 11pt &quot;Playwrite DE Grund&quot;;
 	color: rgb(255, 255, 255);
 }</string>
            </property>
@@ -510,7 +510,7 @@ border-radius : 5px;
 </string>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="myDay">
              <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -591,8 +591,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>317</width>
-                        <height>518</height>
+                        <width>64</width>
+                        <height>44</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -714,7 +714,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>92</width>
+                        <width>64</width>
                         <height>44</height>
                        </rect>
                       </property>
@@ -793,7 +793,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <widget class="QScrollArea" name="assignedToMeScrollA">
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-	text-align : left;
+	text-align : center;
 	background : transparent; 
 	border-radius : 5 px;
 	font: 9pt &quot;Playwrite DE Grund&quot;;
@@ -838,8 +838,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>92</width>
-                        <height>44</height>
+                        <width>317</width>
+                        <height>518</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1043,8 +1043,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>317</width>
-                           <height>518</height>
+                           <width>64</width>
+                           <height>44</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_17">

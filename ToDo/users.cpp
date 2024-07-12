@@ -25,7 +25,7 @@ void Users::addToLists (Lists& d) {
     c[3] = str[3];
 
     int *p = (int*)c;
-    d.setListID(lists.size() + *p);
+    d.setListID(lists.size() + (*p % 20));
     d.setUsername(this->username);
     lists.push_back(d);
 }

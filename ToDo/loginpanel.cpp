@@ -7,6 +7,11 @@ LoginPanel::LoginPanel(std::map<QString, Users> users, QWidget *parent) : QMainW
 
     ui->setupUi(this);
 
+    this->setWindowTitle("Login");
+
+    QIcon icon (":/Image/Icons/icons8-to-do-48.png");
+    this->setWindowIcon(icon);
+
     connect(ui->backPB, SIGNAL(clicked()), this, SLOT(backPBClicked()));
     connect(ui->loginPB, SIGNAL(clicked()), this, SLOT(loginPBClicked()));
 
