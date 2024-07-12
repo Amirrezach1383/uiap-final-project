@@ -892,7 +892,7 @@ void MainToDoPanel::addTaskToDB (Task& task) {
     query.bindValue(":favorite", task.getFavorite());
     query.bindValue(":completed", task.getCompleted());
     query.bindValue(":assignedUser", task.getAssignedUser());
-    query.bindValue(":reminder", task.getReminder());
+    query.bindValue(":reminder", task.getReminder().toString());
     query.bindValue(":taskid", task.getTaskID());
     query.bindValue(":listid", task.getListID());
 

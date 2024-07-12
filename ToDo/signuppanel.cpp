@@ -11,10 +11,22 @@ SignUpPanel::SignUpPanel(std::map<QString, Users> users, QWidget *parent)
 
     connect(ui->signUpPB, SIGNAL(clicked()), this, SLOT(signUpPBClicked()));
     connect(ui->backPB, SIGNAL(clicked()), this, SLOT(backPBClicked()));
+
+    connect(ui->visiblePB, SIGNAL(clicked()), this, SLOT(changeVisible()));
+
+    ui->passwordLE->setEchoMode(QLineEdit::Password);
 }
 
 SignUpPanel::~SignUpPanel() {
     delete ui;
+}
+
+void SignUpPanel::changeVisible () {
+    if(ui->visiblePB->isChecked()) {
+        ui->passwordLE->setEchoMode(QLineEdit::Normal);
+    } else {
+        ui->passwordLE->setEchoMode(QLineEdit::Password);
+    }
 }
 
 // Error Functions
@@ -66,7 +78,7 @@ bool SignUpPanel::usernameErrors () {
     }
 
     i = 0;
-    for(auto it : user) {
+    for(auto &it : user) {
         if(username == it.first) {
             i++;
         }
@@ -159,7 +171,7 @@ bool SignUpPanel::passwordErrors () {
     }
 
     i = 0;
-    for(auto it : user) {
+    for(auto &it : user) {
         if(password == it.first) {
             i++;
         }

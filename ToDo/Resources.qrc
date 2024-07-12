@@ -43,5 +43,7 @@
         <file>Image/Icons/yellow.png</file>
         <file>Image/Icons/green.png</file>
         <file>Image/Icons/icons8-info-50.png</file>
+        <file>Image/Icons/icons8-eye-48.png</file>
+        <file>Image/Icons/icons8-invisible-48.png</file>
     </qresource>
 </RCC>

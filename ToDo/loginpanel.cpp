@@ -9,10 +9,21 @@ LoginPanel::LoginPanel(std::map<QString, Users> users, QWidget *parent) : QMainW
 
     connect(ui->backPB, SIGNAL(clicked()), this, SLOT(backPBClicked()));
     connect(ui->loginPB, SIGNAL(clicked()), this, SLOT(loginPBClicked()));
+
+    connect(ui->visiblePB, SIGNAL(clicked()), this, SLOT(changeVisible()));
+
+    ui->passwordLE->setEchoMode(QLineEdit::Password);
 }
 
 LoginPanel::~LoginPanel() {
     delete ui;
+}
+void LoginPanel::changeVisible () {
+    if(ui->visiblePB->isChecked()) {
+        ui->passwordLE->setEchoMode(QLineEdit::Normal);
+    } else {
+        ui->passwordLE->setEchoMode(QLineEdit::Password);
+    }
 }
 
 void LoginPanel::backPBClicked() {

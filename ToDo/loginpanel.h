@@ -19,6 +19,7 @@ class LoginPanel : public QMainWindow
 private slots:
     void loginPBClicked ();
     void backPBClicked ();
+    void changeVisible ();
 
 
 public:

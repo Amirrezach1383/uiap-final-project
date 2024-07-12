@@ -16,7 +16,16 @@ void Users::setLastName (QString d) {
     lastName = d;
 }
 void Users::addToLists (Lists& d) {
-    d.setListID(lists.size() + (username.toInt() % 20));
+
+    std::string str = username.toStdString();
+    char c[4];
+    c[0] = str[0];
+    c[1] = str[1];
+    c[2] = str[2];
+    c[3] = str[3];
+
+    int *p = (int*)c;
+    d.setListID(lists.size() + *p);
     d.setUsername(this->username);
     lists.push_back(d);
 }

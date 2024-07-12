@@ -42,6 +42,7 @@ public:
 private slots:
     void signUpPBClicked();
     void backPBClicked();
+    void changeVisible ();
 
 private:
     QSqlDatabase toDoDB;
